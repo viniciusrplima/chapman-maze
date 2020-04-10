@@ -11,7 +11,7 @@
 
 #include "Entity.h"
 
-Vector* Entity::getPosition() {
+sf::Vector2f Entity::getPosition() {
 	return position;
 }
 

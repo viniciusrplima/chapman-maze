@@ -13,7 +13,6 @@
 #define __ENTITY_H_
 
 #include <SFML/System.hpp>
-#include "Vector.h"
 
 class Entity {
 
@@ -21,12 +20,12 @@ public:
 
 	virtual void draw() = 0;
 
-	Vector* getPosition();
+	sf::Vector2f getPosition();
 	int getID();
 
 protected:
 
-	Vector* position;
+	sf::Vector2f position;
 	int id;
 };
 
