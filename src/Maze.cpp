@@ -18,8 +18,8 @@
 Maze::Maze() {
 	world = new EntityContainer();
 
-	Entity* b1 = new Block(54642);
-	Entity* b2 = new Block(132323);
+	Entity* b1 = new Block(window, 54642, 1.0f, 1.0f);
+	Entity* b2 = new Block(window, 132323, -1.0f, -1.0f);
 
 	world -> add(b1);
 	world -> add(b2);
@@ -32,10 +32,12 @@ void Maze::run() {
 	sf::ContextSettings settings;
 	settings.depthBits = 24;
 
-	window = new sf::Window(sf::VideoMode(600, 480), 
+	window = new sf::RenderWindow(sf::VideoMode(600, 480), 
 			"Chapman Maze", 
 			sf::Style::Default, 
 			settings);
+
+	window -> setFramerateLimit(60);
 
 	while( window -> isOpen() ) {
 		
@@ -53,27 +55,23 @@ void Maze::run() {
 
 		update();
 		render();
-
-		window -> display();
 	}
 }
 
 void Maze::update() {
-
 }
 
 void Maze::render() {
 
-	glClearColor(0.1f, 0.1f, 0.3f, 1.0f);
-	glClear( GL_COLOR_BUFFER_BIT );
+	glClearColor(0.5f, 0.5f, 0.8f, 1.0f);
+	glClear(GL_COLOR_BUFFER_BIT);
 
 	glPushMatrix();
 
-	glScaled(zoom, zoom, 0.0f);
-
-	world -> draw();
 
 	glPopMatrix();
+
+	window -> display();
 }
 
 void Maze::keyboardHandle(sf::Event event) {

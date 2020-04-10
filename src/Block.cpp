@@ -14,8 +14,11 @@
 #include "Block.h"
 
 
-Block::Block(int id) {
+Block::Block(sf::RenderWindow* window, int id, float x, float y) {
+
 	this -> id = id;
+	position.x = x;
+	position.y = y;
 }
 
 void Block::draw() {
@@ -30,5 +33,5 @@ void Block::draw() {
 }
 
 Block::~Block() {
-
+	
 }

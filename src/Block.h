@@ -9,13 +9,15 @@
  *
  */
 
+#include <SFML/Graphics.hpp>
+
 #include "Entity.h"
 
 class Block : public Entity {
 
 public:
 
-	Block(int);
+	Block(sf::RenderWindow*, int, float, float);
 
 	void draw();
 
@@ -23,4 +25,7 @@ public:
 
 private:
 
+	sf::Texture texture;
+	sf::Sprite sprite;
+	sf::RenderWindow* window;
 };

@@ -29,6 +29,6 @@ public:
 private:
 
 	EntityContainer* world;
-	sf::Window* window;	
+	sf::RenderWindow* window;	
 	float zoom;
 };
