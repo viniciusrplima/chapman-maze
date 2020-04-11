@@ -14,7 +14,9 @@
 
 
 EntityContainer::EntityContainer() {
+}
 
+void EntityContainer::draw(sf::RenderTarget& target, sf::RenderStates states) {
 }
 
 void EntityContainer::cleanEntities() {

@@ -12,21 +12,25 @@
 #ifndef __ENTITY_H_
 #define __ENTITY_H_
 
-#include <SFML/System.hpp>
+#include <SFML/Graphics.hpp>
 
 class Entity {
 
 public:
 
-	virtual void draw() = 0;
+	Entity(sf::Texture&);
+
+	void draw(sf::RenderTarget& target, sf::RenderStates states);
 
 	sf::Vector2f getPosition();
-	int getID();
+
+	~Entity();
 
 protected:
 
+	sf::Sprite sprite;
+
 	sf::Vector2f position;
-	int id;
 };
 
 #endif

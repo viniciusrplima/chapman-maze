@@ -19,6 +19,7 @@ Maze::Maze() : window(sf::VideoMode(600.0f, 480.0f), "Chapman Maze") {
 
 
 void Maze::run() {
+
 	window.setFramerateLimit(60);
 
 	while( window.isOpen() ) {
@@ -44,7 +45,12 @@ void Maze::update() {
 }
 
 void Maze::render() {
+
+	sf::RenderStates states;
+
 	window.clear();
+
+	world.draw(window, states);
 
 	window.display();
 }

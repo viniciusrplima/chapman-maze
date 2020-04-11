@@ -9,6 +9,7 @@
  *
  */
 
+#include <SFML/Graphics.hpp>
 #include <vector>
 
 #include "Entity.h"
@@ -19,11 +20,14 @@ public:
 
 	EntityContainer();
 
+	void draw(sf::RenderTarget&, sf::RenderStates);
+
 	~EntityContainer();
 
 private:
 
 	void cleanEntities();
+
 
 	std::vector<Entity*> entities;
 };
