@@ -13,38 +13,20 @@
 #include <GL/gl.h>
 
 #include "Maze.h"
-#include "Block.h"
 
-Maze::Maze() {
-	world = new EntityContainer();
-
-	Entity* b1 = new Block(window, 54642, 1.0f, 1.0f);
-	Entity* b2 = new Block(window, 132323, -1.0f, -1.0f);
-
-	world -> add(b1);
-	world -> add(b2);
-
-	zoom = 0.1f;
+Maze::Maze() : window(sf::VideoMode(600.0f, 480.0f), "Chapman Maze") {
 }
 
 
 void Maze::run() {
-	sf::ContextSettings settings;
-	settings.depthBits = 24;
+	window.setFramerateLimit(60);
 
-	window = new sf::RenderWindow(sf::VideoMode(600, 480), 
-			"Chapman Maze", 
-			sf::Style::Default, 
-			settings);
-
-	window -> setFramerateLimit(60);
-
-	while( window -> isOpen() ) {
+	while( window.isOpen() ) {
 		
 		sf::Event event;
-		while(window -> pollEvent(event)) {
+		while(window.pollEvent(event)) {
 			if(event.type == sf::Event::Closed) {
-				window -> close();
+				window.close();
 			}
 
 			if(event.type == sf::Event::KeyPressed ||
@@ -62,16 +44,9 @@ void Maze::update() {
 }
 
 void Maze::render() {
+	window.clear();
 
-	glClearColor(0.5f, 0.5f, 0.8f, 1.0f);
-	glClear(GL_COLOR_BUFFER_BIT);
-
-	glPushMatrix();
-
-
-	glPopMatrix();
-
-	window -> display();
+	window.display();
 }
 
 void Maze::keyboardHandle(sf::Event event) {
@@ -89,5 +64,4 @@ void Maze::keyboardHandle(sf::Event event) {
 }
 
 Maze::~Maze() {
-	delete world;
 }

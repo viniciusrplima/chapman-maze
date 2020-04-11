@@ -13,6 +13,6 @@
 #include "src/Maze.h"
 
 int main() {
-	Maze* maze = new Maze();
-	maze -> run();
+	Maze maze;
+	maze.run();
 }

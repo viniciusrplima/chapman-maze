@@ -14,7 +14,3 @@
 sf::Vector2f Entity::getPosition() {
 	return position;
 }
-
-int Entity::getID() {
-	return id;
-}

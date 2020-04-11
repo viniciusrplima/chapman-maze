@@ -19,12 +19,6 @@ public:
 
 	EntityContainer();
 
-	void add(Entity*);
-	void remove(int);
-	Entity* find(int);
-	void update();
-	void draw();
-
 	~EntityContainer();
 
 private:
