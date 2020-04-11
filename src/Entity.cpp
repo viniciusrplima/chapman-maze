@@ -14,10 +14,15 @@
 Entity::Entity(sf::Texture& texture, float x, float y) : sprite(texture) {
 	position.x = x;
 	position.y = y;
+
+	auto size = texture.getSize();
+	scale.x = 20.0f / size.x;
+	scale.y = 20.0f / size.y;
 }
 
 void Entity::draw(sf::RenderTarget& target, sf::RenderStates states) {
-	states.transform.translate(position.x, position.y);
+	sprite.setScale(scale.x, scale.y);
+	sprite.setPosition(position.x, position.y);
 	target.draw(sprite, states);
 }
 

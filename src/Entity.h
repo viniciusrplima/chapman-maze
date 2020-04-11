@@ -13,6 +13,7 @@
 #define __ENTITY_H_
 
 #include <SFML/Graphics.hpp>
+#include <glm/glm.hpp>
 
 class Entity {
 
@@ -26,11 +27,12 @@ public:
 
 	~Entity();
 
-protected:
+private:
 
 	sf::Sprite sprite;
 
 	sf::Vector2f position;
+	sf::Vector2f scale;
 };
 
 #endif
