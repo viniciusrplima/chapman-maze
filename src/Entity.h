@@ -18,7 +18,7 @@ class Entity {
 
 public:
 
-	Entity(sf::Texture&);
+	Entity(sf::Texture&, float x, float y);
 
 	void draw(sf::RenderTarget& target, sf::RenderStates states);
 

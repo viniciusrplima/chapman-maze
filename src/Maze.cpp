@@ -17,8 +17,18 @@
 Maze::Maze() : window(sf::VideoMode(600.0f, 480.0f), "Chapman Maze") {
 }
 
-
 void Maze::run() {
+
+	TextureHolder textures;
+
+	world.setTextureHolder(&textures);
+	world.loadTextures();
+
+	world.createEntity(Texture::SOLDIER, 120.0f, 130.0f);
+	world.createEntity(Texture::WATER, 20.0f, 130.0f);
+	world.createEntity(Texture::ROCK, 350.0f, 190.0f);
+	world.createEntity(Texture::GRASS, 120.0f, 180.0f);
+	world.createEntity(Texture::SOLDIER, 300.0f, 130.0f);
 
 	window.setFramerateLimit(60);
 
@@ -35,7 +45,7 @@ void Maze::run() {
 				keyboardHandle(event);
 			}
 		}
-
+		
 		update();
 		render();
 	}
