@@ -9,6 +9,8 @@
  *
  */
 
+#include <fstream>
+#include <iostream>
 
 #include "EntityContainer.h"
 
@@ -36,6 +38,26 @@ void EntityContainer::loadTextures() {
 void EntityContainer::createEntity(Texture::ID id, float x, float y) {
 	Entity* entity = new Entity(textures->get(id), x, y);
 	entities.push_back(entity);
+}
+
+void EntityContainer::saveWorldMap(const std::string& filename) {
+	std::ofstream file(filename);
+	
+	if(!file) {
+		std::cout << "Error: impossible to create " << filename << std::endl;
+		return;
+	}
+
+	for(int i = 0; i < entities.size(); i++) {
+		int texType = 0;
+		auto position = entities[i]->getPosition();
+
+		file << texType << ':'
+		     << position.x << ':' 
+		     << position.y << '\n';
+	}
+
+	file.close();
 }
 
 void EntityContainer::cleanEntities() {

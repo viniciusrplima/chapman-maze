@@ -1,5 +1,6 @@
 
-OBJS = objs/main.o objs/Entity.o objs/EntityContainer.o objs/Maze.o objs/TextureHolder.o
+OBJS = objs/main.o objs/Entity.o objs/EntityContainer.o objs/Maze.o objs/TextureHolder.o \
+       objs/Camera.o
 
 LIBS = -lstdc++ -lm -lsfml-graphics -lsfml-window -lsfml-system -lGL
 
@@ -20,6 +21,9 @@ objs/Maze.o: src/Maze.h src/Maze.cpp
 
 objs/TextureHolder.o: src/TextureHolder.h src/TextureHolder.cpp
 	gcc -c src/TextureHolder.cpp -o objs/TextureHolder.o
+
+objs/Camera.o: src/Camera.h src/Camera.cpp
+	gcc -c src/Camera.cpp -o objs/Camera.o
 
 clean:
 	rm maze $(OBJS)

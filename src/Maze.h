@@ -12,6 +12,7 @@
 #include <SFML/Graphics.hpp>
 
 #include "EntityContainer.h"
+#include "Camera.h"
 
 class Maze {
 
@@ -31,6 +32,5 @@ private:
 
 	EntityContainer world;
 	sf::RenderWindow window;
-	float zoom;
-	sf::Vector2f position;
+	Camera camera;
 };

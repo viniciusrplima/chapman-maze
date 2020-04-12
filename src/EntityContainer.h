@@ -26,6 +26,8 @@ public:
 	void loadTextures();
 	void createEntity(Texture::ID, float x, float y);
 
+	void saveWorldMap(const std::string& filename);
+
 	~EntityContainer();
 
 private:
