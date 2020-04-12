@@ -22,6 +22,7 @@ public:
 	void run();
 	void update();
 	void render();
+	void eventHandle(sf::Event);
 	void keyboardHandle(sf::Event);
 
 	~Maze();
@@ -31,4 +32,5 @@ private:
 	EntityContainer world;
 	sf::RenderWindow window;
 	float zoom;
+	sf::Vector2f position;
 };
