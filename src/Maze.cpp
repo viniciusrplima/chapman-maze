@@ -15,6 +15,7 @@
 #include "Maze.h"
 
 Maze::Maze() : window(sf::VideoMode(600.0f, 480.0f), "Chapman Maze") {
+	hand = Texture::ROCK;
 }
 
 void Maze::run() {
@@ -23,20 +24,8 @@ void Maze::run() {
 
 	world.setTextureHolder(&textures);
 	world.loadTextures();
-
-	world.createEntity(Texture::SOLDIER, 0.0f, 0.0f);
-	world.createEntity(Texture::SOLDIER, 120.0f, 130.0f);
-	world.createEntity(Texture::WATER, 20.0f, 20.0f);
-	world.createEntity(Texture::WATER, 0.0f, 20.0f);
-	world.createEntity(Texture::WATER, 40.0f, 20.0f);
-	world.createEntity(Texture::WATER, -20.0f, 0.0f);
-	world.createEntity(Texture::ROCK, 350.0f, 190.0f);
-	world.createEntity(Texture::ROCK, 330.0f, 190.0f);
-	world.createEntity(Texture::ROCK, 310.0f, 190.0f);
-	world.createEntity(Texture::GRASS, 120.0f, 180.0f);
-	world.createEntity(Texture::SOLDIER, 300.0f, 130.0f);
-
-	world.saveWorldMap("./maps/default.map");
+	world.loadWorldMap("./maps/default.map");
+	player = world.createPlayer(-20.0f, -20.0f);
 
 	window.setFramerateLimit(60);
 
@@ -54,6 +43,7 @@ void Maze::run() {
 }
 
 void Maze::update() {
+	camera.setPosition(player->getPosition());
 }
 
 void Maze::render() {
@@ -90,6 +80,48 @@ void Maze::keyboardHandle(sf::Event event) {
 		}
 		case sf::Keyboard::Subtract: {
 			camera.zoomOut();
+			break;
+		}
+		case sf::Keyboard::Up: {
+			player->up(PLAYER_SPEED);
+			break;
+		}
+		case sf::Keyboard::Down: {
+			player->down(PLAYER_SPEED);
+			break;
+		}
+		case sf::Keyboard::Left: {
+			player->left(PLAYER_SPEED);
+			break;
+		}
+		case sf::Keyboard::Right: {
+			player->right(PLAYER_SPEED);
+			break;
+		}
+		case sf::Keyboard::Q: {
+			hand = Texture::WATER;
+			break;
+		}
+		case sf::Keyboard::W: {
+			hand = Texture::ROCK;
+			break;
+		}
+		case sf::Keyboard::E: {
+			hand = Texture::GRASS;
+			break;
+		}
+		case sf::Keyboard::R: {
+			hand = Texture::WALL;
+		}
+		case sf::Keyboard::S: {
+			world.saveWorldMap("./maps/default.map");
+			break;
+		}
+		case sf::Keyboard::Space: {
+			auto pos = player->getPosition();
+			pos.x = 20.0f * (int) (pos.x / 20.0f);
+			pos.y = 20.0f * (int) (pos.y / 20.0f);
+			world.createEntity(hand, pos.x, pos.y);
 			break;
 		}
 	}

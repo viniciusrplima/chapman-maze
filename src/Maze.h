@@ -14,6 +14,8 @@
 #include "EntityContainer.h"
 #include "Camera.h"
 
+#define PLAYER_SPEED 10.0f
+
 class Maze {
 
 public: 
@@ -33,4 +35,6 @@ private:
 	EntityContainer world;
 	sf::RenderWindow window;
 	Camera camera;
+	Player* player;
+	Texture::ID hand;
 };

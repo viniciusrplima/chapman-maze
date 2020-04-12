@@ -15,21 +15,25 @@
 #include <SFML/Graphics.hpp>
 #include <glm/glm.hpp>
 
+#include "TextureHolder.h"
+
 class Entity {
 
 public:
 
-	Entity(sf::Texture&, float x, float y);
+	Entity(Texture::ID, float x, float y, TextureHolder*);
 
 	void draw(sf::RenderTarget& target, sf::RenderStates states);
 
 	sf::Vector2f getPosition();
+	Texture::ID getTexture();
 
 	~Entity();
 
-private:
+protected:
 
 	sf::Sprite sprite;
+	Texture::ID texture;
 
 	sf::Vector2f position;
 	sf::Vector2f scale;

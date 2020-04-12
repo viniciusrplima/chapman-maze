@@ -54,6 +54,7 @@ sf::RenderStates Camera::getRenderState() {
 	transform.scale(600.0f / windowSize.x, 480.0f / windowSize.y);
 	transform.translate(windowSize.x / 2, windowSize.y / 2);
 	transform.scale(zoom, zoom);
+	transform.translate(-position.x, -position.y);
 
 	return transform;
 }

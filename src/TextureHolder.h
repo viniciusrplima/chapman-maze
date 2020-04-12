@@ -21,7 +21,8 @@ namespace Texture {
 		SOLDIER, 
 		WATER, 
 		ROCK, 
-		GRASS
+		GRASS, 
+		WALL
 	};
 }
 
