@@ -15,12 +15,18 @@
 #include "EntityContainer.h"
 
 
-EntityContainer::EntityContainer() {
+EntityContainer::EntityContainer() : playerAnimation() {
 }
 
 void EntityContainer::draw(sf::RenderTarget& target, sf::RenderStates states) {
 	for(int i = 0; i < entities.size(); i++) {
-		entities[i]->draw(target, states);
+		if(entities[i]->getType() != Entity::PLAYER) {
+			entities[i]->draw(target, states);
+		}
+		else {
+			Player* player = (Player*) entities[i];
+			player->drawThis(target, states);
+		}
 	}
 }
 
@@ -34,15 +40,39 @@ void EntityContainer::loadTextures() {
 	textures->load(Texture::ROCK, "./assets/rock.png");
 	textures->load(Texture::GRASS, "./assets/grass.png");
 	textures->load(Texture::WALL, "./assets/wall.png");
+	textures->load(Texture::DINO_GREEN, "./assets/dino_green.png");
 }
 
-void EntityContainer::createEntity(Texture::ID id, float x, float y) {
-	Entity* entity = new Entity(id, x, y, textures);
+void EntityContainer::createEntity(Entity::Type type, float x, float y) {
+
+	Texture::ID tex;
+
+	switch(type) {
+		case Entity::WATER: 
+			tex = Texture::WATER;
+			break;
+		case Entity::ROCK:
+			tex = Texture::ROCK;
+			break;
+		case Entity::GRASS:
+			tex = Texture::GRASS;
+			break;
+		case Entity::WALL:
+			tex = Texture::WALL;
+			break;
+	}
+
+	Entity* entity = new Entity(type, x, y, textures->get(tex));
 	entities.push_back(entity);
 }
 
 Player* EntityContainer::createPlayer(float x, float y) {
-	Player* player = new Player(Texture::SOLDIER, x, y, textures);
+	playerAnimation.setAnimation("DOWN");
+	playerAnimation.setTexture(Texture::DINO_GREEN);
+	playerAnimation.setTextureHolder(textures);
+	playerAnimation.loadAnimationFromFile("./animations/dino_green.anim");
+
+	Player* player = new Player(Entity::PLAYER, x, y, textures->get(Texture::SOLDIER), &playerAnimation);
 	entities.push_back(player);
 	return player;
 }
@@ -56,12 +86,15 @@ void EntityContainer::saveWorldMap(const std::string& filename) {
 	}
 
 	for(int i = 0; i < entities.size(); i++) {
-		int texType = entities[i]->getTexture();
-		auto position = entities[i]->getPosition();
-
-		file << texType << ':'
-		     << position.x << ':' 
-		     << position.y << '\n';
+		int entType = entities[i]->getType();
+		
+		if(entType != Entity::PLAYER) {
+			auto position = entities[i]->getPosition();
+	
+			file << entType << ':'
+			     << position.x << ':' 
+			     << position.y << '\n';
+		}
 	}
 
 	file.close();
@@ -88,11 +121,11 @@ void EntityContainer::parseLine(const std::string& line) {
 
 	if(line == "") return;
 
-	Texture::ID tex = (Texture::ID) std::stoi(tokens[0]);
+	Entity::Type type = (Entity::Type) std::stoi(tokens[0]);
 	float posX = std::stof(tokens[1]);
 	float posY = std::stof(tokens[2]);
 
-	createEntity(tex, posX, posY);
+	createEntity(type, posX, posY);
 }
 
 std::vector<std::string> EntityContainer::splitLine(const std::string& line, char delimiter) {

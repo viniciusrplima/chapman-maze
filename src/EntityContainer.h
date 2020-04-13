@@ -16,6 +16,7 @@
 #include "Entity.h"
 #include "Player.h"
 #include "TextureHolder.h"
+#include "AnimationSet.h"
 
 class EntityContainer {
 
@@ -26,7 +27,7 @@ public:
 	void draw(sf::RenderTarget&, sf::RenderStates);
 	void setTextureHolder(TextureHolder* textures);
 	void loadTextures();
-	void createEntity(Texture::ID, float x, float y);
+	void createEntity(Entity::Type, float x, float y);
 	Player* createPlayer(float x, float y);
 
 	void saveWorldMap(const std::string& filename);
@@ -42,4 +43,5 @@ private:
 
 	TextureHolder* textures;
 	std::vector<Entity*> entities;
+	AnimationSet playerAnimation;
 };

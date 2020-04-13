@@ -20,20 +20,27 @@
 class Entity {
 
 public:
+	enum Type {
+		PLAYER, 
+		WATER, 
+		ROCK, 
+		GRASS, 
+		WALL
+	};
 
-	Entity(Texture::ID, float x, float y, TextureHolder*);
+	Entity(Type type, float x, float y, sf::Texture&);
 
 	void draw(sf::RenderTarget& target, sf::RenderStates states);
 
 	sf::Vector2f getPosition();
-	Texture::ID getTexture();
+	Type getType();
 
 	~Entity();
 
 protected:
 
 	sf::Sprite sprite;
-	Texture::ID texture;
+	Type type;
 
 	sf::Vector2f position;
 	sf::Vector2f scale;

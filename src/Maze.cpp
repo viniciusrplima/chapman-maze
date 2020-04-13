@@ -15,7 +15,7 @@
 #include "Maze.h"
 
 Maze::Maze() : window(sf::VideoMode(600.0f, 480.0f), "Chapman Maze") {
-	hand = Texture::ROCK;
+	hand = Entity::ROCK;
 }
 
 void Maze::run() {
@@ -99,19 +99,19 @@ void Maze::keyboardHandle(sf::Event event) {
 			break;
 		}
 		case sf::Keyboard::Q: {
-			hand = Texture::WATER;
+			hand = Entity::WATER;
 			break;
 		}
 		case sf::Keyboard::W: {
-			hand = Texture::ROCK;
+			hand = Entity::ROCK;
 			break;
 		}
 		case sf::Keyboard::E: {
-			hand = Texture::GRASS;
+			hand = Entity::GRASS;
 			break;
 		}
 		case sf::Keyboard::R: {
-			hand = Texture::WALL;
+			hand = Entity::WALL;
 		}
 		case sf::Keyboard::S: {
 			world.saveWorldMap("./maps/default.map");

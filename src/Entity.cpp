@@ -11,13 +11,12 @@
 
 #include "Entity.h"
 
-Entity::Entity(Texture::ID tex, float x, float y, TextureHolder* textures) : sprite() {
-	sprite.setTexture(textures->get(tex));
-	texture = tex;
+Entity::Entity(Type type, float x, float y, sf::Texture& texture) : sprite(texture) {
+	this->type = type;
 	position.x = x;
 	position.y = y;
 
-	auto size = textures->get(tex).getSize();
+	auto size = texture.getSize();
 	scale.x = 20.0f / size.x;
 	scale.y = 20.0f / size.y;
 }
@@ -28,12 +27,12 @@ void Entity::draw(sf::RenderTarget& target, sf::RenderStates states) {
 	target.draw(sprite, states);
 }
 
-Texture::ID Entity::getTexture() {
-	return texture;
-}
-
 sf::Vector2f Entity::getPosition() {
 	return position;
+}
+
+Entity::Type Entity::getType() {
+	return type;
 }
 
 Entity::~Entity() {

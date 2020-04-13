@@ -22,7 +22,8 @@ namespace Texture {
 		WATER, 
 		ROCK, 
 		GRASS, 
-		WALL
+		WALL, 
+		DINO_GREEN,
 	};
 }
 

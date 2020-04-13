@@ -11,10 +11,12 @@
 
 #include <SFML/Graphics.hpp>
 
+#include "Animation.h"
+#include "AnimationSet.h"
 #include "EntityContainer.h"
 #include "Camera.h"
 
-#define PLAYER_SPEED 10.0f
+#define PLAYER_SPEED 1.0f
 
 class Maze {
 
@@ -36,5 +38,5 @@ private:
 	sf::RenderWindow window;
 	Camera camera;
 	Player* player;
-	Texture::ID hand;
+	Entity::Type hand;
 };
