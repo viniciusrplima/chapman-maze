@@ -26,8 +26,6 @@ public:
 
 	void draw(sf::RenderTarget& target, sf::RenderStates states);
 
-	void drawThis(sf::RenderTarget& target, sf::RenderStates states);
-
 	~Player();
 
 private:

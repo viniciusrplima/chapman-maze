@@ -42,10 +42,5 @@ void Player::draw(sf::RenderTarget& target, sf::RenderStates states) {
 	animation->draw(target, states);
 }
 
-void Player::drawThis(sf::RenderTarget& target, sf::RenderStates states) {
-	states.transform.translate(position.x, position.y);
-	animation->draw(target, states);
-}
-
 Player::~Player() {
 }
