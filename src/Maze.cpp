@@ -55,6 +55,7 @@ void Maze::render() {
 
 	window.clear();
 
+	world.drawMark(player->getPosition(), window, state);
 	world.draw(window, state);
 
 	window.display();

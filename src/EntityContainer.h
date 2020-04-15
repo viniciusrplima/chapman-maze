@@ -26,6 +26,7 @@ public:
 	EntityContainer();
 
 	void draw(sf::RenderTarget&, sf::RenderStates);
+	void drawMark(sf::Vector2f, sf::RenderTarget&, sf::RenderStates);
 	void update();
 	void setTextureHolder(TextureHolder* textures);
 	void loadTextures();

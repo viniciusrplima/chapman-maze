@@ -12,6 +12,7 @@
 #include <fstream>
 #include <iostream>
 #include <algorithm>
+#include <cmath>
 
 #include "Block.h"
 #include "EntityContainer.h"
@@ -29,6 +30,18 @@ void EntityContainer::draw(sf::RenderTarget& target, sf::RenderStates states) {
 		if(entities[i]->getType() == Entity::PLAYER)
 			entities[i]->draw(target, states);
 	}
+}
+
+void EntityContainer::drawMark(sf::Vector2f pos, sf::RenderTarget& target, sf::RenderStates states) {
+	auto quadPos = calculateBlockQuad(pos.x, pos.y);
+	sf::RectangleShape rect;
+	rect.setSize(sf::Vector2f(BLOCK_WIDTH, BLOCK_WIDTH));
+	rect.setFillColor(sf::Color::Transparent);
+	rect.setOutlineColor(sf::Color(120, 220, 120));
+	rect.setOutlineThickness(2.0f);
+
+	states.transform.translate(quadPos.x, quadPos.y);
+	target.draw(rect, states);
 }
 
 void EntityContainer::update() {
@@ -165,8 +178,8 @@ std::vector<std::string> EntityContainer::splitLine(const std::string& line, cha
 }
 
 sf::Vector2i EntityContainer::calculateBlockQuad(float x, float y) {
-	int line = BLOCK_WIDTH * (int)( y / BLOCK_WIDTH );
-	int column = BLOCK_WIDTH * (int)( x / BLOCK_WIDTH );
+	int line = BLOCK_WIDTH * floor(y / BLOCK_WIDTH );
+	int column = BLOCK_WIDTH * floor(x / BLOCK_WIDTH );
 	return sf::Vector2i(column, line);
 }
 
