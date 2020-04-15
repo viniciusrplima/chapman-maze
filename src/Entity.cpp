@@ -15,6 +15,7 @@ Entity::Entity(Type type, float x, float y) {
 	this->type = type;
 	position.x = x;
 	position.y = y;
+	physic = Entity::NONE;
 }
 
 sf::Vector2f Entity::getPosition() {
@@ -23,6 +24,14 @@ sf::Vector2f Entity::getPosition() {
 
 Entity::Type Entity::getType() {
 	return type;
+}
+
+void Entity::setPhysic(Entity::Physics physic) {
+	this->physic = physic;
+}
+
+Entity::Physics Entity::getPhysic() {
+	return physic;
 }
 
 Entity::~Entity() {

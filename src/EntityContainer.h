@@ -12,6 +12,7 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include <vector>
+#include <map>
 
 #include "Entity.h"
 #include "Player.h"
@@ -25,7 +26,7 @@ public:
 	EntityContainer();
 
 	void draw(sf::RenderTarget&, sf::RenderStates);
-	void update(float deltaTime);
+	void update();
 	void setTextureHolder(TextureHolder* textures);
 	void loadTextures();
 	void createBlock(Entity::Type, float x, float y);
@@ -41,8 +42,10 @@ private:
 	void parseLine(const std::string& line);
 	std::vector<std::string> splitLine(const std::string& line, char delimiter);
 	void cleanEntities();
+	sf::Vector2i calculateBlockQuad(float x, float y);
 
 	TextureHolder* textures;
 	std::vector<Entity*> entities;
+	std::map<std::tuple<int, int>, Entity*> ground;
 	AnimationSet playerAnimation;
 };

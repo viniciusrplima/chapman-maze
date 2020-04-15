@@ -11,6 +11,7 @@
 
 #include <fstream>
 #include <iostream>
+#include <algorithm>
 
 #include "Block.h"
 #include "EntityContainer.h"
@@ -30,6 +31,10 @@ void EntityContainer::draw(sf::RenderTarget& target, sf::RenderStates states) {
 	}
 }
 
+void EntityContainer::update() {
+
+}
+
 void EntityContainer::setTextureHolder(TextureHolder* textures) {
 	this->textures = textures;
 }
@@ -44,6 +49,13 @@ void EntityContainer::loadTextures() {
 }
 
 void EntityContainer::createBlock(Entity::Type type, float x, float y) {
+
+	auto blockQuad = calculateBlockQuad(x, y);
+	auto pos = std::make_tuple(blockQuad.x, blockQuad.y);
+	auto found = ground.find(pos);
+
+	if(found != ground.end()) return;
+
 
 	Texture::ID tex;
 
@@ -62,8 +74,9 @@ void EntityContainer::createBlock(Entity::Type type, float x, float y) {
 			break;
 	}
 
-	Entity* entity = new Block(type, x, y, textures->get(tex));
+	Entity* entity = new Block(type, blockQuad.x, blockQuad.y, textures->get(tex));
 	entities.push_back(entity);
+	ground.insert(std::make_pair(pos, entity));
 }
 
 Player* EntityContainer::createPlayer(float x, float y) {
@@ -149,6 +162,12 @@ std::vector<std::string> EntityContainer::splitLine(const std::string& line, cha
 		tokens.push_back(token);
 
 	return tokens;
+}
+
+sf::Vector2i EntityContainer::calculateBlockQuad(float x, float y) {
+	int line = BLOCK_WIDTH * (int)( y / BLOCK_WIDTH );
+	int column = BLOCK_WIDTH * (int)( x / BLOCK_WIDTH );
+	return sf::Vector2i(column, line);
 }
 
 void EntityContainer::cleanEntities() {

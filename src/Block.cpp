@@ -14,8 +14,8 @@
 Block::Block(Entity::Type type, float x, float y, sf::Texture& tex)
 : Entity(type, x, y), sprite(tex) {
 	auto size = tex.getSize();
-	scale.x = 20.0f / size.x;
-	scale.y = 20.0f / size.y;
+	scale.x = BLOCK_WIDTH / size.x;
+	scale.y = BLOCK_WIDTH / size.y;
 }
 
 void Block::draw(sf::RenderTarget& target, sf::RenderStates states) {

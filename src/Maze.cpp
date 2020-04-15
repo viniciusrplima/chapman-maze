@@ -46,6 +46,7 @@ void Maze::update() {
 	deltaTime = clock.restart();
 	camera.setPosition(player->getPosition());
 	updateInput();
+	world.update();
 }
 
 void Maze::render() {
@@ -104,8 +105,6 @@ void Maze::updateInput() {
 
 	if(keyboardState[ sf::Keyboard::Space ]) {
 		auto pos = player->getPosition();
-		pos.x = 20.0f * (int) (-1 + pos.x / 20.0f);
-		pos.y = 20.0f * (int) (-1 + pos.y / 20.0f);
 		world.createBlock(hand, pos.x, pos.y);
 	}
 

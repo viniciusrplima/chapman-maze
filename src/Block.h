@@ -11,6 +11,8 @@
 
 #include "Entity.h"
 
+#define BLOCK_WIDTH 20.0f
+
 class Block : public Entity {
 
 public:
