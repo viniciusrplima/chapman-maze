@@ -21,7 +21,12 @@ EntityContainer::EntityContainer() : playerAnimation() {
 
 void EntityContainer::draw(sf::RenderTarget& target, sf::RenderStates states) {
 	for(int i = 0; i < entities.size(); i++) {
-		entities[i]->draw(target, states);
+		if(entities[i]->getType() != Entity::PLAYER)
+			entities[i]->draw(target, states);
+	}
+	for(int i = 0; i < entities.size(); i++) {
+		if(entities[i]->getType() == Entity::PLAYER)
+			entities[i]->draw(target, states);
 	}
 }
 
