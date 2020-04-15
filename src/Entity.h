@@ -28,9 +28,9 @@ public:
 		WALL
 	};
 
-	Entity(Type type, float x, float y, sf::Texture&);
+	Entity(Type type, float x, float y);
 
-	void draw(sf::RenderTarget& target, sf::RenderStates states);
+	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) = 0;
 
 	sf::Vector2f getPosition();
 	Type getType();
@@ -39,11 +39,9 @@ public:
 
 protected:
 
-	sf::Sprite sprite;
 	Type type;
 
 	sf::Vector2f position;
-	sf::Vector2f scale;
 };
 
 #endif

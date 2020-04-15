@@ -12,8 +12,8 @@
 
 #include "Player.h"
 
-Player::Player(Entity::Type type, float x, float y, sf::Texture& texture, AnimationSet* anim) :
-Entity(type, x, y, texture) {
+Player::Player(float x, float y, AnimationSet* anim) :
+Entity(Entity::PLAYER, x, y) {
 	animation = anim;
 }
 
@@ -35,6 +35,11 @@ void Player::right(float deltaTime) {
 void Player::down(float deltaTime) {
 	position.y += deltaTime * PLAYER_SPEED;
 	animation->setAnimation("DOWN");
+}
+
+void Player::draw(sf::RenderTarget& target, sf::RenderStates states) {
+	states.transform.translate(position.x, position.y);
+	animation->draw(target, states);
 }
 
 void Player::drawThis(sf::RenderTarget& target, sf::RenderStates states) {

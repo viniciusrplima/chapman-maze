@@ -12,6 +12,7 @@
 #include <fstream>
 #include <iostream>
 
+#include "Block.h"
 #include "EntityContainer.h"
 
 
@@ -62,7 +63,7 @@ void EntityContainer::createEntity(Entity::Type type, float x, float y) {
 			break;
 	}
 
-	Entity* entity = new Entity(type, x, y, textures->get(tex));
+	Entity* entity = new Block(type, x, y, textures->get(tex));
 	entities.push_back(entity);
 }
 
@@ -72,7 +73,7 @@ Player* EntityContainer::createPlayer(float x, float y) {
 	playerAnimation.setTextureHolder(textures);
 	playerAnimation.loadAnimationFromFile("./animations/dino_green.anim");
 
-	Player* player = new Player(Entity::PLAYER, x, y, textures->get(Texture::SOLDIER), &playerAnimation);
+	Player* player = new Player(x, y, &playerAnimation);
 	entities.push_back(player);
 	return player;
 }

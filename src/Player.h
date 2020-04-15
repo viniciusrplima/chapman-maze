@@ -17,12 +17,14 @@
 class Player : public Entity {
 
 public:
-	Player(Entity::Type, float x, float y, sf::Texture&, AnimationSet *anim);
+	Player(float x, float y, AnimationSet *anim);
 
 	void up(float offset);
 	void left(float offset);
 	void right(float offset);
 	void down(float offset);
+
+	void draw(sf::RenderTarget& target, sf::RenderStates states);
 
 	void drawThis(sf::RenderTarget& target, sf::RenderStates states);
 

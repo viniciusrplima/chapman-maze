@@ -11,20 +11,10 @@
 
 #include "Entity.h"
 
-Entity::Entity(Type type, float x, float y, sf::Texture& texture) : sprite(texture) {
+Entity::Entity(Type type, float x, float y) {
 	this->type = type;
 	position.x = x;
 	position.y = y;
-
-	auto size = texture.getSize();
-	scale.x = 20.0f / size.x;
-	scale.y = 20.0f / size.y;
-}
-
-void Entity::draw(sf::RenderTarget& target, sf::RenderStates states) {
-	sprite.setScale(scale.x, scale.y);
-	sprite.setPosition(position.x, position.y);
-	target.draw(sprite, states);
 }
 
 sf::Vector2f Entity::getPosition() {
