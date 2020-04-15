@@ -43,7 +43,9 @@ void Maze::run() {
 }
 
 void Maze::update() {
+	deltaTime = clock.restart();
 	camera.setPosition(player->getPosition());
+	updateInput();
 }
 
 void Maze::render() {
@@ -73,58 +75,39 @@ void Maze::eventHandle(sf::Event event) {
 }
 
 void Maze::keyboardHandle(sf::Event event) {
-	switch(event.key.code) {
-		case sf::Keyboard::Add: {
-			camera.zoomIn();
-			break;
-		}
-		case sf::Keyboard::Subtract: {
-			camera.zoomOut();
-			break;
-		}
-		case sf::Keyboard::Up: {
-			player->up(PLAYER_SPEED);
-			break;
-		}
-		case sf::Keyboard::Down: {
-			player->down(PLAYER_SPEED);
-			break;
-		}
-		case sf::Keyboard::Left: {
-			player->left(PLAYER_SPEED);
-			break;
-		}
-		case sf::Keyboard::Right: {
-			player->right(PLAYER_SPEED);
-			break;
-		}
-		case sf::Keyboard::Q: {
-			hand = Entity::WATER;
-			break;
-		}
-		case sf::Keyboard::W: {
-			hand = Entity::ROCK;
-			break;
-		}
-		case sf::Keyboard::E: {
-			hand = Entity::GRASS;
-			break;
-		}
-		case sf::Keyboard::R: {
-			hand = Entity::WALL;
-		}
-		case sf::Keyboard::S: {
-			world.saveWorldMap("./maps/default.map");
-			break;
-		}
-		case sf::Keyboard::Space: {
-			auto pos = player->getPosition();
-			pos.x = 20.0f * (int) (pos.x / 20.0f);
-			pos.y = 20.0f * (int) (pos.y / 20.0f);
-			world.createEntity(hand, pos.x, pos.y);
-			break;
-		}
+
+	if(event.type == sf::Event::KeyPressed) {
+		keyboardState[event.key.code] = 1;
 	}
+	if(event.type == sf::Event::KeyReleased) {
+		keyboardState[event.key.code] = 0;
+	}
+}
+
+void Maze::updateInput() {
+
+	if(keyboardState[ sf::Keyboard::Add ]) camera.zoomIn();
+	if(keyboardState[ sf::Keyboard::Subtract ]) camera.zoomOut();
+
+	if(keyboardState[ sf::Keyboard::Up ]) player->up(deltaTime.asSeconds());
+	else if(keyboardState[ sf::Keyboard::Down ]) player->down(deltaTime.asSeconds());
+	else if(keyboardState[ sf::Keyboard::Left ]) player->left(deltaTime.asSeconds());
+	else if(keyboardState[ sf::Keyboard::Right ]) player->right(deltaTime.asSeconds());
+
+	if(keyboardState[ sf::Keyboard::Q ]) hand = Entity::WATER;
+	if(keyboardState[ sf::Keyboard::W ]) hand = Entity::ROCK;
+	if(keyboardState[ sf::Keyboard::E ]) hand = Entity::GRASS;
+	if(keyboardState[ sf::Keyboard::R ]) hand = Entity::WALL;
+
+	if(keyboardState[ sf::Keyboard::S ]) world.saveWorldMap("./maps/default.map");
+
+	if(keyboardState[ sf::Keyboard::Space ]) {
+		auto pos = player->getPosition();
+		pos.x = 20.0f * (int) (pos.x / 20.0f);
+		pos.y = 20.0f * (int) (pos.y / 20.0f);
+		world.createEntity(hand, pos.x, pos.y);
+	}
+
 }
 
 Maze::~Maze() {

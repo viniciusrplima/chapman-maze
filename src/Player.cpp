@@ -17,24 +17,24 @@ Entity(type, x, y, texture) {
 	animation = anim;
 }
 
-void Player::up(float offset) {
-	position.y -= offset;
+void Player::up(float deltaTime) {
+	position.y -= deltaTime * PLAYER_SPEED;
 	animation->setAnimation("UP");
 }
 
-void Player::left(float offset) {
-	position.x -= offset;
+void Player::left(float deltaTime) {
+	position.x -= deltaTime * PLAYER_SPEED;
 	animation->setAnimation("LEFT");
 }
 
-void Player::right(float offset) {
+void Player::right(float deltaTime) {
+	position.x += deltaTime * PLAYER_SPEED;
 	animation->setAnimation("RIGHT");
-	position.x += offset;
 }
 
-void Player::down(float offset) {
+void Player::down(float deltaTime) {
+	position.y += deltaTime * PLAYER_SPEED;
 	animation->setAnimation("DOWN");
-	position.y += offset;
 }
 
 void Player::drawThis(sf::RenderTarget& target, sf::RenderStates states) {

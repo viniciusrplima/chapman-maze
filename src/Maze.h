@@ -10,13 +10,13 @@
  */
 
 #include <SFML/Graphics.hpp>
+#include <map>
 
 #include "Animation.h"
 #include "AnimationSet.h"
 #include "EntityContainer.h"
 #include "Camera.h"
 
-#define PLAYER_SPEED 1.0f
 
 class Maze {
 
@@ -33,10 +33,22 @@ public:
 	~Maze();
 
 private:
-
-	EntityContainer world;
+	void updateInput();
+	
 	sf::RenderWindow window;
+
+	// Game objects
+	EntityContainer world;
 	Camera camera;
 	Player* player;
+
+	// Time Objects
+	sf::Clock clock;
+	sf::Time deltaTime;
+
+	// Store the keyboard state
+	std::map<sf::Keyboard::Key, int> keyboardState;
+
+	// Store the current player block in hand
 	Entity::Type hand;
 };
