@@ -104,9 +104,9 @@ void Maze::updateInput() {
 
 	if(keyboardState[ sf::Keyboard::Space ]) {
 		auto pos = player->getPosition();
-		pos.x = 20.0f * (int) (pos.x / 20.0f);
-		pos.y = 20.0f * (int) (pos.y / 20.0f);
-		world.createEntity(hand, pos.x, pos.y);
+		pos.x = 20.0f * (int) (-1 + pos.x / 20.0f);
+		pos.y = 20.0f * (int) (-1 + pos.y / 20.0f);
+		world.createBlock(hand, pos.x, pos.y);
 	}
 
 }

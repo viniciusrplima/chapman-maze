@@ -43,7 +43,7 @@ void EntityContainer::loadTextures() {
 	textures->load(Texture::DINO_GREEN, "./assets/dino_green.png");
 }
 
-void EntityContainer::createEntity(Entity::Type type, float x, float y) {
+void EntityContainer::createBlock(Entity::Type type, float x, float y) {
 
 	Texture::ID tex;
 
@@ -67,6 +67,7 @@ void EntityContainer::createEntity(Entity::Type type, float x, float y) {
 }
 
 Player* EntityContainer::createPlayer(float x, float y) {
+
 	playerAnimation.setAnimation("DOWN");
 	playerAnimation.setTexture(Texture::DINO_GREEN);
 	playerAnimation.setTextureHolder(textures);
@@ -125,7 +126,7 @@ void EntityContainer::parseLine(const std::string& line) {
 	float posX = std::stof(tokens[1]);
 	float posY = std::stof(tokens[2]);
 
-	createEntity(type, posX, posY);
+	createBlock(type, posX, posY);
 }
 
 std::vector<std::string> EntityContainer::splitLine(const std::string& line, char delimiter) {

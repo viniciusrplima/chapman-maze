@@ -47,7 +47,7 @@ void Player::stop() {
 }
 
 void Player::draw(sf::RenderTarget& target, sf::RenderStates states) {
-	states.transform.translate(position.x, position.y);
+	states.transform.translate(position.x - 6, position.y - 8);
 	animation->draw(target, states);
 }
 

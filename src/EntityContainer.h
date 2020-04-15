@@ -25,9 +25,10 @@ public:
 	EntityContainer();
 
 	void draw(sf::RenderTarget&, sf::RenderStates);
+	void update(float deltaTime);
 	void setTextureHolder(TextureHolder* textures);
 	void loadTextures();
-	void createEntity(Entity::Type, float x, float y);
+	void createBlock(Entity::Type, float x, float y);
 	Player* createPlayer(float x, float y);
 
 	void saveWorldMap(const std::string& filename);
