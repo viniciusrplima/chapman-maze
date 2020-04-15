@@ -21,6 +21,10 @@ void AnimationSet::setAnimation(std::string id) {
 	currentAnimation = id;
 }
 
+std::string AnimationSet::getAnimation() {
+	return currentAnimation;
+}
+
 void AnimationSet::draw(sf::RenderTarget& target, sf::RenderStates states) {
 	auto found = animations.find(currentAnimation);
 	found->second->draw(target, states);

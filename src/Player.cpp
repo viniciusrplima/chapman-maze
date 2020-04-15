@@ -37,6 +37,15 @@ void Player::down(float deltaTime) {
 	animation->setAnimation("DOWN");
 }
 
+void Player::stop() {
+	auto anim = animation->getAnimation();
+
+	if(anim == "DOWN") animation->setAnimation("STOP_DOWN");
+	if(anim == "UP") animation->setAnimation("STOP_UP");
+	if(anim == "LEFT") animation->setAnimation("STOP_LEFT");
+	if(anim == "RIGHT") animation -> setAnimation("STOP_RIGHT");
+}
+
 void Player::draw(sf::RenderTarget& target, sf::RenderStates states) {
 	states.transform.translate(position.x, position.y);
 	animation->draw(target, states);

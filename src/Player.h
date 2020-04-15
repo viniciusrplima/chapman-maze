@@ -23,6 +23,7 @@ public:
 	void left(float offset);
 	void right(float offset);
 	void down(float offset);
+	void stop();
 
 	void draw(sf::RenderTarget& target, sf::RenderStates states);
 

@@ -93,6 +93,7 @@ void Maze::updateInput() {
 	else if(keyboardState[ sf::Keyboard::Down ]) player->down(deltaTime.asSeconds());
 	else if(keyboardState[ sf::Keyboard::Left ]) player->left(deltaTime.asSeconds());
 	else if(keyboardState[ sf::Keyboard::Right ]) player->right(deltaTime.asSeconds());
+	else player->stop();
 
 	if(keyboardState[ sf::Keyboard::Q ]) hand = Entity::WATER;
 	if(keyboardState[ sf::Keyboard::W ]) hand = Entity::ROCK;

@@ -25,6 +25,7 @@ public:
 	AnimationSet();
 
 	void setAnimation(std::string id);
+	std::string getAnimation();
 	void draw(sf::RenderTarget& target, sf::RenderStates states);
 	void setTexture(Texture::ID id);
 	void setTextureHolder(TextureHolder* texHolder);
