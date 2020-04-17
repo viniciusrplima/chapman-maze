@@ -95,7 +95,7 @@ void EntityContainer::createBlock(Entity::Type type, float x, float y) {
 
 Player* EntityContainer::createPlayer(float x, float y) {
 
-	playerAnimation.setAnimation("DOWN");
+	playerAnimation.setAnimation("STOP_DOWN");
 	playerAnimation.setTexture(Texture::DINO_GREEN);
 	playerAnimation.setTextureHolder(textures);
 	playerAnimation.loadAnimationFromFile("./animations/dino_green.anim");
