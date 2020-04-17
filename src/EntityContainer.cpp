@@ -22,13 +22,8 @@ EntityContainer::EntityContainer() : playerAnimation() {
 }
 
 void EntityContainer::draw(sf::RenderTarget& target, sf::RenderStates states) {
-	for(int i = 0; i < entities.size(); i++) {
-		if(entities[i]->getType() != Entity::PLAYER)
-			entities[i]->draw(target, states);
-	}
-	for(int i = 0; i < entities.size(); i++) {
-		if(entities[i]->getType() == Entity::PLAYER)
-			entities[i]->draw(target, states);
+	for(auto iter = ground.begin(); iter != ground.end(); iter++) {
+		iter->second->draw(target, states);
 	}
 }
 
@@ -105,8 +100,16 @@ void EntityContainer::createBlock(Entity::Type type, float x, float y) {
 	if(type == Entity::WALL) entity->setPhysic(Entity::BLOCK);
 	else entity->setPhysic(Entity::NONE);
 
-	entities.push_back(entity);
 	ground.insert(std::make_pair(pos, entity));
+}
+
+void EntityContainer::removeBlock(float x, float y) {
+	auto quadPos = calculateBlockQuad(x, y);
+
+	auto found = ground.find(std::make_tuple(quadPos.x, quadPos.y));
+	if(found != ground.end()) {
+		ground.erase(found);
+	}
 }
 
 Player* EntityContainer::createPlayer(float x, float y) {
@@ -117,7 +120,6 @@ Player* EntityContainer::createPlayer(float x, float y) {
 	playerAnimation.loadAnimationFromFile("./animations/dino_green.anim");
 
 	Player* player = new Player(x, y, &playerAnimation);
-	entities.push_back(player);
 	return player;
 }
 
@@ -129,11 +131,11 @@ void EntityContainer::saveWorldMap(const std::string& filename) {
 		return;
 	}
 
-	for(int i = 0; i < entities.size(); i++) {
-		int entType = entities[i]->getType();
+	for(auto iter = ground.begin(); iter != ground.end(); iter++) {
+		int entType = iter->second->getType();
 		
 		if(entType != Entity::PLAYER) {
-			auto position = entities[i]->getPosition();
+			auto position = iter->second->getPosition();
 	
 			file << entType << ':'
 			     << position.x << ':' 
@@ -201,8 +203,8 @@ sf::Vector2i EntityContainer::calculateBlockQuad(float x, float y) {
 }
 
 void EntityContainer::cleanEntities() {
-	for(int i = 0; i < entities.size(); i++) {
-		delete entities[i];
+	for(auto iter = ground.begin(); iter != ground.end(); iter++) {
+		delete (iter->second);
 	}
 }
 

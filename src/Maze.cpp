@@ -57,10 +57,9 @@ void Maze::render() {
 	window.clear();
 
 	if(!removeForward) world.drawAddMark(player->getForward(), window, state);
-
 	world.draw(window, state);
-
 	if(removeForward) world.drawDelMark(player->getForward(), window, state);
+	player->draw(window, state);
 
 	window.display();
 }
@@ -113,7 +112,11 @@ void Maze::updateInput() {
 
 	if(keyboardState[ sf::Keyboard::Space ]) {
 		auto pos = player->getForward();
-		world.createBlock(hand, pos.x, pos.y);
+
+		if(!removeForward)
+			world.createBlock(hand, pos.x, pos.y);
+		else
+			world.removeBlock(pos.x, pos.y);
 	}
 
 }

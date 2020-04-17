@@ -32,6 +32,7 @@ public:
 	void setTextureHolder(TextureHolder* textures);
 	void loadTextures();
 	void createBlock(Entity::Type, float x, float y);
+	void removeBlock(float x, float y);
 	Player* createPlayer(float x, float y);
 
 	void saveWorldMap(const std::string& filename);
