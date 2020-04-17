@@ -11,6 +11,9 @@
 
 #include "Entity.h"
 
+#ifndef __BLOCK_H_
+#define __BLOCK_H_
+
 #define BLOCK_WIDTH 20.0f
 
 class Block : public Entity {
@@ -27,3 +30,5 @@ private:
 	sf::Sprite sprite;
 	sf::Vector2f scale;
 };
+
+#endif

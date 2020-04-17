@@ -34,11 +34,12 @@ void EntityContainer::draw(sf::RenderTarget& target, sf::RenderStates states) {
 
 void EntityContainer::drawMark(sf::Vector2f pos, sf::RenderTarget& target, sf::RenderStates states) {
 	auto quadPos = calculateBlockQuad(pos.x, pos.y);
+
 	sf::RectangleShape rect;
 	rect.setSize(sf::Vector2f(BLOCK_WIDTH, BLOCK_WIDTH));
 	rect.setFillColor(sf::Color::Transparent);
 	rect.setOutlineColor(sf::Color(120, 220, 120));
-	rect.setOutlineThickness(2.0f);
+	rect.setOutlineThickness(1.0f);
 
 	states.transform.translate(quadPos.x, quadPos.y);
 	target.draw(rect, states);

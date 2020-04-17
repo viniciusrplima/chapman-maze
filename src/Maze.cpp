@@ -55,7 +55,7 @@ void Maze::render() {
 
 	window.clear();
 
-	world.drawMark(player->getPosition(), window, state);
+	world.drawMark(player->getForward(), window, state);
 	world.draw(window, state);
 
 	window.display();
@@ -105,7 +105,7 @@ void Maze::updateInput() {
 	if(keyboardState[ sf::Keyboard::S ]) world.saveWorldMap("./maps/default.map");
 
 	if(keyboardState[ sf::Keyboard::Space ]) {
-		auto pos = player->getPosition();
+		auto pos = player->getForward();
 		world.createBlock(hand, pos.x, pos.y);
 	}
 
