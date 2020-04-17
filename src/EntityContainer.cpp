@@ -32,7 +32,7 @@ void EntityContainer::draw(sf::RenderTarget& target, sf::RenderStates states) {
 	}
 }
 
-void EntityContainer::drawMark(sf::Vector2f pos, sf::RenderTarget& target, sf::RenderStates states) {
+void EntityContainer::drawAddMark(sf::Vector2f pos, sf::RenderTarget& target, sf::RenderStates states) {
 	auto quadPos = calculateBlockQuad(pos.x, pos.y);
 
 	sf::RectangleShape rect;
@@ -45,8 +45,20 @@ void EntityContainer::drawMark(sf::Vector2f pos, sf::RenderTarget& target, sf::R
 	target.draw(rect, states);
 }
 
-void EntityContainer::update() {
+void EntityContainer::drawDelMark(sf::Vector2f pos, sf::RenderTarget& target, sf::RenderStates states) {
+	auto quadPos = calculateBlockQuad(pos.x, pos.y);
 
+	sf::RectangleShape rect;
+	rect.setSize(sf::Vector2f(BLOCK_WIDTH, BLOCK_WIDTH));
+	rect.setFillColor(sf::Color::Transparent);
+	rect.setOutlineColor(sf::Color(220, 120, 120));
+	rect.setOutlineThickness(1.0f);
+
+	states.transform.translate(quadPos.x, quadPos.y);
+	target.draw(rect, states);
+}
+
+void EntityContainer::update() {
 }
 
 void EntityContainer::setTextureHolder(TextureHolder* textures) {
@@ -89,6 +101,10 @@ void EntityContainer::createBlock(Entity::Type type, float x, float y) {
 	}
 
 	Entity* entity = new Block(type, blockQuad.x, blockQuad.y, textures->get(tex));
+
+	if(type == Entity::WALL) entity->setPhysic(Entity::BLOCK);
+	else entity->setPhysic(Entity::NONE);
+
 	entities.push_back(entity);
 	ground.insert(std::make_pair(pos, entity));
 }

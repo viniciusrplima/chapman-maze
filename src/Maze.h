@@ -51,4 +51,5 @@ private:
 
 	// Store the current player block in hand
 	Entity::Type hand;
+	bool removeForward;
 };

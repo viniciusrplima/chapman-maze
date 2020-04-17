@@ -60,6 +60,10 @@ sf::Vector2f Player::getForward() {
 	return pos;
 }
 
+Player::Move Player::getMove() {
+	return move;
+}
+
 void Player::draw(sf::RenderTarget& target, sf::RenderStates states) {
 	states.transform.translate(position.x - 6, position.y - 8);
 	animation->draw(target, states);

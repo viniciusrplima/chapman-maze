@@ -16,6 +16,7 @@
 
 Maze::Maze() : window(sf::VideoMode(600.0f, 480.0f), "Chapman Maze") {
 	hand = Entity::ROCK;
+	removeForward = false;
 }
 
 void Maze::run() {
@@ -55,8 +56,11 @@ void Maze::render() {
 
 	window.clear();
 
-	world.drawMark(player->getForward(), window, state);
+	if(!removeForward) world.drawAddMark(player->getForward(), window, state);
+
 	world.draw(window, state);
+
+	if(removeForward) world.drawDelMark(player->getForward(), window, state);
 
 	window.display();
 }
@@ -101,6 +105,9 @@ void Maze::updateInput() {
 	if(keyboardState[ sf::Keyboard::W ]) hand = Entity::ROCK;
 	if(keyboardState[ sf::Keyboard::E ]) hand = Entity::GRASS;
 	if(keyboardState[ sf::Keyboard::R ]) hand = Entity::WALL;
+
+	if(keyboardState[ sf::Keyboard::A ]) removeForward = false;
+	if(keyboardState[ sf::Keyboard::Z ]) removeForward = true;
 
 	if(keyboardState[ sf::Keyboard::S ]) world.saveWorldMap("./maps/default.map");
 

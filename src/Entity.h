@@ -37,6 +37,7 @@ public:
 
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) = 0;
 
+	void setPosition(float x, float y);
 	sf::Vector2f getPosition();
 	Type getType();
 

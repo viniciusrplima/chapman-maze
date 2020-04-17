@@ -18,6 +18,11 @@ Entity::Entity(Type type, float x, float y) {
 	physic = Entity::NONE;
 }
 
+void Entity::setPosition(float x, float y) {
+	position.x = x;
+	position.y = y;
+}
+
 sf::Vector2f Entity::getPosition() {
 	return position;
 }

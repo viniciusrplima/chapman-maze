@@ -32,6 +32,7 @@ public:
 	void down(float offset);
 	void stop();
 	sf::Vector2f getForward();
+	Move getMove();
 
 	void draw(sf::RenderTarget& target, sf::RenderStates states);
 
