@@ -25,7 +25,9 @@ public:
 		WATER, 
 		ROCK, 
 		GRASS, 
-		WALL
+		WALL,
+		VERTICAL_WALL,
+		FLOOR
 	};
 
 	enum Physics {

@@ -48,7 +48,6 @@ private:
 	sf::Vector2i calculateBlockQuad(float x, float y);
 
 	TextureHolder* textures;
-	std::vector<Entity*> entities;
 	std::map<std::tuple<int, int>, Entity*> ground;
 	AnimationSet playerAnimation;
 };

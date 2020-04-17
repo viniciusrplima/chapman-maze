@@ -23,7 +23,9 @@ namespace Texture {
 		ROCK, 
 		GRASS, 
 		WALL, 
+		VERTICAL_WALL,
 		DINO_GREEN,
+		FLOOR
 	};
 }
 

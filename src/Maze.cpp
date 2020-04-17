@@ -104,6 +104,9 @@ void Maze::updateInput() {
 	if(keyboardState[ sf::Keyboard::W ]) hand = Entity::ROCK;
 	if(keyboardState[ sf::Keyboard::E ]) hand = Entity::GRASS;
 	if(keyboardState[ sf::Keyboard::R ]) hand = Entity::WALL;
+	if(keyboardState[ sf::Keyboard::T ]) hand = Entity::VERTICAL_WALL;
+	if(keyboardState[ sf::Keyboard::Y ]) hand = Entity::FLOOR;
+
 
 	if(keyboardState[ sf::Keyboard::A ]) removeForward = false;
 	if(keyboardState[ sf::Keyboard::Z ]) removeForward = true;
