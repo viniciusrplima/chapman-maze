@@ -18,26 +18,22 @@ Entity(Entity::PLAYER, x, y) {
 	animation = anim;
 }
 
-void Player::up(float deltaTime) {
-	position.y -= deltaTime * PLAYER_SPEED;
+void Player::up() {
 	animation->setAnimation("UP");
 	move = Player::UP;
 }
 
-void Player::left(float deltaTime) {
-	position.x -= deltaTime * PLAYER_SPEED;
+void Player::left() {
 	animation->setAnimation("LEFT");
 	move = Player::LEFT;
 }
 
-void Player::right(float deltaTime) {
-	position.x += deltaTime * PLAYER_SPEED;
+void Player::right() {
 	animation->setAnimation("RIGHT");
 	move = Player::RIGHT;
 }
 
-void Player::down(float deltaTime) {
-	position.y += deltaTime * PLAYER_SPEED;
+void Player::down() {
 	animation->setAnimation("DOWN");
 	move = Player::DOWN;
 }

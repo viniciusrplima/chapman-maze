@@ -33,7 +33,9 @@ public:
 	void loadTextures();
 	void createBlock(Entity::Type, float x, float y);
 	void removeBlock(float x, float y);
+
 	Player* createPlayer(float x, float y);
+	void movePlayer(Player::Move, float);
 
 	void saveWorldMap(const std::string& filename);
 	void loadWorldMap(const std::string& filename);
@@ -46,8 +48,10 @@ private:
 	std::vector<std::string> splitLine(const std::string& line, char delimiter);
 	void cleanEntities();
 	sf::Vector2i calculateBlockQuad(float x, float y);
+	bool isMoveEnable(sf::Vector2f);
 
 	TextureHolder* textures;
 	std::map<std::tuple<int, int>, Entity*> ground;
+	Player* player;
 	AnimationSet playerAnimation;
 };

@@ -27,6 +27,7 @@ void Maze::run() {
 	world.loadTextures();
 	world.loadWorldMap("./maps/default.map");
 	player = world.createPlayer(-20.0f, -20.0f);
+	player->setPosition(10.0f, 0.0f);
 
 	window.setFramerateLimit(60);
 
@@ -94,10 +95,10 @@ void Maze::updateInput() {
 	if(keyboardState[ sf::Keyboard::Add ]) camera.zoomIn();
 	if(keyboardState[ sf::Keyboard::Subtract ]) camera.zoomOut();
 
-	if(keyboardState[ sf::Keyboard::Up ]) player->up(deltaTime.asSeconds());
-	else if(keyboardState[ sf::Keyboard::Down ]) player->down(deltaTime.asSeconds());
-	else if(keyboardState[ sf::Keyboard::Left ]) player->left(deltaTime.asSeconds());
-	else if(keyboardState[ sf::Keyboard::Right ]) player->right(deltaTime.asSeconds());
+	if(keyboardState[ sf::Keyboard::Up ]) world.movePlayer(Player::UP, deltaTime.asSeconds());
+	else if(keyboardState[ sf::Keyboard::Down ]) world.movePlayer(Player::DOWN, deltaTime.asSeconds());
+	else if(keyboardState[ sf::Keyboard::Left ]) world.movePlayer(Player::LEFT, deltaTime.asSeconds());
+	else if(keyboardState[ sf::Keyboard::Right ]) world.movePlayer(Player::RIGHT, deltaTime.asSeconds());
 	else player->stop();
 
 	if(keyboardState[ sf::Keyboard::Q ]) hand = Entity::WATER;

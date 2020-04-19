@@ -127,8 +127,65 @@ Player* EntityContainer::createPlayer(float x, float y) {
 	playerAnimation.setTextureHolder(textures);
 	playerAnimation.loadAnimationFromFile("./animations/dino_green.anim");
 
-	Player* player = new Player(x, y, &playerAnimation);
+	player = new Player(x, y, &playerAnimation);
 	return player;
+}
+
+void EntityContainer::movePlayer(Player::Move move, float deltaTime) {
+	auto pos = player->getPosition();
+	float quadRadius = BLOCK_WIDTH / 2;
+
+	switch(move) {
+		case Player::LEFT: 
+			pos.x -= PLAYER_SPEED * deltaTime;
+			break;
+		case Player::RIGHT: 
+			pos.x += PLAYER_SPEED * deltaTime;
+			break;
+		case Player::UP: 
+			pos.y -= PLAYER_SPEED * deltaTime;
+			break;
+		case Player::DOWN: 
+			pos.y += PLAYER_SPEED * deltaTime;
+			break;
+	}
+
+	sf::Vector2f top_left(pos.x - quadRadius, pos.y);
+	sf::Vector2f down_left(pos.x - quadRadius, pos.y + quadRadius);
+	sf::Vector2f top_right(pos.x + quadRadius, pos.y);
+	sf::Vector2f down_right(pos.x + quadRadius, pos.y + quadRadius);
+
+	if(isMoveEnable(top_left) &&
+	   isMoveEnable(down_left) &&
+	   isMoveEnable(top_right) &&
+	   isMoveEnable(down_right)) {
+
+		player->setPosition(pos.x, pos.y);
+		
+		switch(move) {
+			case Player::LEFT:
+				player->left();
+				break;
+			case Player::RIGHT:
+				player->right();
+				break;
+			case Player::UP:
+				player->up();
+				break;
+			case Player::DOWN:
+				player->down();
+				break;
+		}
+	}
+}
+
+bool EntityContainer::isMoveEnable(sf::Vector2f pos) {
+	auto quadPos = calculateBlockQuad(pos.x, pos.y);
+	auto found = ground.find(std::make_pair(quadPos.x, quadPos.y));
+
+	if(found != ground.end() && found->second->getPhysic() == Entity::BLOCK)
+		return false;
+	return true;
 }
 
 void EntityContainer::saveWorldMap(const std::string& filename) {

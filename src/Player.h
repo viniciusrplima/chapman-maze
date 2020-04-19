@@ -26,10 +26,10 @@ public:
 
 	Player(float x, float y, AnimationSet *anim);
 
-	void up(float offset);
-	void left(float offset);
-	void right(float offset);
-	void down(float offset);
+	void up();
+	void left();
+	void right();
+	void down();
 	void stop();
 	sf::Vector2f getForward();
 	Move getMove();
