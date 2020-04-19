@@ -84,6 +84,7 @@ void Maze::eventHandle(sf::Event event) {
 		camera.setWindowSize(event.size.width, event.size.height);
 		gameHUD.setAspect(sf::Vector2f(600.0f / event.size.width, 480.0f / event.size.height));
 	}
+
 }
 
 void Maze::keyboardHandle(sf::Event event) {

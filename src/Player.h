@@ -12,7 +12,7 @@
 #include "AnimationSet.h"
 #include "Entity.h"
 
-#define PLAYER_SPEED 30.0f
+#define PLAYER_SPEED 40.0f
 
 class Player : public Entity {
 

@@ -10,6 +10,7 @@
  */
 
 #include <SFML/Graphics.hpp>
+#include <iostream>
 
 #include "HandState.h"
 #include "TextureHolder.h"
@@ -31,4 +32,5 @@ private:
 	HandState* hand;
 	TextureHolder* textureHolder;
 	sf::Vector2f aspect;
+	sf::Font font;
 };
