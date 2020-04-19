@@ -32,9 +32,7 @@ void EntityContainer::drawAddMark(sf::Vector2f pos, sf::RenderTarget& target, sf
 
 	sf::RectangleShape rect;
 	rect.setSize(sf::Vector2f(BLOCK_WIDTH, BLOCK_WIDTH));
-	rect.setFillColor(sf::Color::Transparent);
-	rect.setOutlineColor(sf::Color(120, 220, 120));
-	rect.setOutlineThickness(1.0f);
+	rect.setFillColor(sf::Color(120, 220, 120, 200));
 
 	states.transform.translate(quadPos.x, quadPos.y);
 	target.draw(rect, states);
