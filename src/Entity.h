@@ -13,9 +13,7 @@
 #define __ENTITY_H_
 
 #include <SFML/Graphics.hpp>
-#include <glm/glm.hpp>
 
-#include "TextureHolder.h"
 
 class Entity {
 

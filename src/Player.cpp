@@ -48,10 +48,12 @@ void Player::stop() {
 sf::Vector2f Player::getForward() {
 	auto pos = position;
 
-	if(move == Player::UP) pos.y -= BLOCK_WIDTH;
-	else if(move == Player::DOWN) pos.y += BLOCK_WIDTH;
-	else if(move == Player::LEFT) pos.x -= BLOCK_WIDTH;
-	else if(move == Player::RIGHT) pos.x += BLOCK_WIDTH;
+	float quadRadius = BLOCK_WIDTH / 2;
+
+	if(move == Player::UP) pos.y -= BLOCK_WIDTH + quadRadius;
+	else if(move == Player::DOWN) pos.y += BLOCK_WIDTH + quadRadius;
+	else if(move == Player::LEFT) pos.x -= BLOCK_WIDTH + quadRadius;
+	else if(move == Player::RIGHT) pos.x += BLOCK_WIDTH + quadRadius;
 
 	return pos;
 }

@@ -15,8 +15,8 @@
 #include "Maze.h"
 
 Maze::Maze() : window(sf::VideoMode(600.0f, 480.0f), "Chapman Maze") {
-	hand = Entity::ROCK;
-	removeForward = false;
+	handState.blockType = Entity::ROCK;
+	handState.removeForward = false;
 }
 
 void Maze::run() {
@@ -26,8 +26,12 @@ void Maze::run() {
 	world.setTextureHolder(&textures);
 	world.loadTextures();
 	world.loadWorldMap("./maps/default.map");
+
 	player = world.createPlayer(-20.0f, -20.0f);
 	player->setPosition(10.0f, 0.0f);
+
+	gameHUD.setHandState(&handState);
+	gameHUD.setTextureHolder(&textures);
 
 	window.setFramerateLimit(60);
 
@@ -57,10 +61,11 @@ void Maze::render() {
 
 	window.clear();
 
-	if(!removeForward) world.drawAddMark(player->getForward(), window, state);
+	if(!handState.removeForward) world.drawAddMark(player->getForward(), window, state);
 	world.draw(window, state);
-	if(removeForward) world.drawDelMark(player->getForward(), window, state);
+	if(handState.removeForward) world.drawDelMark(player->getForward(), window, state);
 	player->draw(window, state);
+	gameHUD.draw(window);
 
 	window.display();
 }
@@ -77,6 +82,7 @@ void Maze::eventHandle(sf::Event event) {
 
 	if(event.type == sf::Event::Resized) {
 		camera.setWindowSize(event.size.width, event.size.height);
+		gameHUD.setAspect(sf::Vector2f(600.0f / event.size.width, 480.0f / event.size.height));
 	}
 }
 
@@ -101,24 +107,24 @@ void Maze::updateInput() {
 	else if(keyboardState[ sf::Keyboard::Right ]) world.movePlayer(Player::RIGHT, deltaTime.asSeconds());
 	else player->stop();
 
-	if(keyboardState[ sf::Keyboard::Q ]) hand = Entity::WATER;
-	if(keyboardState[ sf::Keyboard::W ]) hand = Entity::ROCK;
-	if(keyboardState[ sf::Keyboard::E ]) hand = Entity::GRASS;
-	if(keyboardState[ sf::Keyboard::R ]) hand = Entity::WALL;
-	if(keyboardState[ sf::Keyboard::T ]) hand = Entity::VERTICAL_WALL;
-	if(keyboardState[ sf::Keyboard::Y ]) hand = Entity::FLOOR;
+	if(keyboardState[ sf::Keyboard::Q ]) handState.blockType = Entity::WATER;
+	if(keyboardState[ sf::Keyboard::W ]) handState.blockType = Entity::ROCK;
+	if(keyboardState[ sf::Keyboard::E ]) handState.blockType = Entity::GRASS;
+	if(keyboardState[ sf::Keyboard::R ]) handState.blockType = Entity::WALL;
+	if(keyboardState[ sf::Keyboard::T ]) handState.blockType = Entity::VERTICAL_WALL;
+	if(keyboardState[ sf::Keyboard::Y ]) handState.blockType = Entity::FLOOR;
 
 
-	if(keyboardState[ sf::Keyboard::A ]) removeForward = false;
-	if(keyboardState[ sf::Keyboard::Z ]) removeForward = true;
+	if(keyboardState[ sf::Keyboard::A ]) handState.removeForward = false;
+	if(keyboardState[ sf::Keyboard::Z ]) handState.removeForward = true;
 
 	if(keyboardState[ sf::Keyboard::S ]) world.saveWorldMap("./maps/default.map");
 
 	if(keyboardState[ sf::Keyboard::Space ]) {
 		auto pos = player->getForward();
 
-		if(!removeForward)
-			world.createBlock(hand, pos.x, pos.y);
+		if(!handState.removeForward)
+			world.createBlock(handState.blockType, pos.x, pos.y);
 		else
 			world.removeBlock(pos.x, pos.y);
 	}

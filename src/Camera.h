@@ -15,6 +15,8 @@
 #define __CAMERA_H_
 
 #define CAM_ZOOM_FACTOR 1.1f
+#define CAM_ZOOM_MAX 10.0f
+#define CAM_ZOOM_MIN 0.5f
 
 class Camera {
 

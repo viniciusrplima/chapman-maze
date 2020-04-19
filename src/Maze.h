@@ -16,7 +16,8 @@
 #include "AnimationSet.h"
 #include "EntityContainer.h"
 #include "Camera.h"
-
+#include "HandState.h"
+#include "HUD.h"
 
 class Maze {
 
@@ -50,6 +51,8 @@ private:
 	std::map<sf::Keyboard::Key, int> keyboardState;
 
 	// Store the current player block in hand
-	Entity::Type hand;
-	bool removeForward;
+	HandState handState;
+
+	// Store HUD of the game
+	HUD gameHUD;
 };

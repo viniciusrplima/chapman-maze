@@ -22,11 +22,13 @@ Camera::Camera() {
 }
 
 void Camera::zoomIn() {
-	zoom *= CAM_ZOOM_FACTOR;
+	if(zoom * CAM_ZOOM_FACTOR < CAM_ZOOM_MAX)
+		zoom *= CAM_ZOOM_FACTOR;
 }
 
 void Camera::zoomOut() {
-	zoom /= CAM_ZOOM_FACTOR;
+	if(zoom / CAM_ZOOM_FACTOR > CAM_ZOOM_MIN)
+		zoom /= CAM_ZOOM_FACTOR;
 }
 
 void Camera::setPosition(sf::Vector2f pos) {

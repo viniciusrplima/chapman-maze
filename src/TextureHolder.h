@@ -13,6 +13,8 @@
 #include <SFML/Graphics.hpp>
 #include <map>
 
+#include "Entity.h"
+
 #ifndef __TEXTURE_HOLDER_H_
 #define __TEXTURE_HOLDER_H_
 
@@ -37,6 +39,7 @@ public:
 
 	void load(Texture::ID id, const std::string& filename);
 	sf::Texture& get(Texture::ID id);
+	sf::Texture& get(Entity::Type type);
 
 	~TextureHolder();
 

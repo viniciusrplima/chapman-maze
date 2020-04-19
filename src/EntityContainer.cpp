@@ -79,33 +79,12 @@ void EntityContainer::createBlock(Entity::Type type, float x, float y) {
 
 	if(found != ground.end()) return;
 
+	Entity* entity = new Block(type, blockQuad.x, blockQuad.y, textures->get(type));
 
-	Texture::ID tex;
-
-	switch(type) {
-		case Entity::WATER: 
-			tex = Texture::WATER;
-			break;
-		case Entity::ROCK:
-			tex = Texture::ROCK;
-			break;
-		case Entity::GRASS:
-			tex = Texture::GRASS;
-			break;
-		case Entity::WALL:
-			tex = Texture::WALL;
-			break;
-		case Entity::VERTICAL_WALL:
-			tex = Texture::VERTICAL_WALL;
-			break;
-		case Entity::FLOOR:
-			tex = Texture::FLOOR;
-			break;
-	}
-
-	Entity* entity = new Block(type, blockQuad.x, blockQuad.y, textures->get(tex));
-
-	if(type == Entity::WALL || type == Entity::VERTICAL_WALL) entity->setPhysic(Entity::BLOCK);
+	if(type == Entity::WALL || 
+	   type == Entity::VERTICAL_WALL || 
+	   type == Entity::WATER )
+		entity->setPhysic(Entity::BLOCK);
 	else entity->setPhysic(Entity::NONE);
 
 	ground.insert(std::make_pair(pos, entity));
