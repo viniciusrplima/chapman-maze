@@ -15,6 +15,9 @@
 #include "HandState.h"
 #include "TextureHolder.h"
 
+#ifndef __HUD_H_
+#define __HUD_H_
+
 class HUD {
 
 public:
@@ -34,3 +37,5 @@ private:
 	sf::Vector2f aspect;
 	sf::Font font;
 };
+
+#endif

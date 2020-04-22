@@ -19,6 +19,9 @@
 #include "TextureHolder.h"
 #include "AnimationSet.h"
 
+#ifndef __ENTITY_CONTAINER_H_
+#define __ENTITY_CONTAINER_H_
+
 class EntityContainer {
 
 public:
@@ -34,7 +37,7 @@ public:
 	void createBlock(Entity::Type, float x, float y);
 	void removeBlock(float x, float y);
 
-	Player* createPlayer(float x, float y);
+	Player* createPlayer(float x, float y, Texture::ID, const std::string&);
 	void movePlayer(Player::Move, float);
 
 	void saveWorldMap(const std::string& filename);
@@ -55,3 +58,5 @@ private:
 	Player* player;
 	AnimationSet playerAnimation;
 };
+
+#endif

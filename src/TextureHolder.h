@@ -26,8 +26,10 @@ namespace Texture {
 		GRASS, 
 		WALL, 
 		VERTICAL_WALL,
+		FLOOR, 
+
 		DINO_GREEN,
-		FLOOR
+		PRINCESS
 	};
 }
 

@@ -19,16 +19,19 @@
 #include "HandState.h"
 #include "HUD.h"
 
+#ifndef __MAZE_H_
+#define __MAZE_H_
+
 class Maze {
 
 public: 
 	
 	Maze();
 
-	void run();
+	void run(sf::RenderWindow&, Texture::ID playerTex, const std::string& animFile);
 	void update();
-	void render();
-	void eventHandle(sf::Event);
+	void render(sf::RenderWindow&);
+	void eventHandle(sf::RenderWindow&, sf::Event);
 	void keyboardHandle(sf::Event);
 
 	~Maze();
@@ -56,3 +59,6 @@ private:
 	// Store HUD of the game
 	HUD gameHUD;
 };
+
+
+#endif

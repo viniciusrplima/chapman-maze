@@ -22,7 +22,9 @@ void Animation::draw(sf::RenderTarget& target, sf::RenderStates states) {
 	int framesNum = frames.size();
 	int frame = (int) ((timeAsSeconds / duration) * framesNum) % framesNum;
 
-	sprite.setTextureRect(frames[frame]);
+	auto rect = frames[frame];
+	states.transform.scale(PLAYER_WIDTH / rect.width, PLAYER_HEIGHT / rect.height);
+	sprite.setTextureRect(rect);
 	target.draw(sprite, states);
 }
 

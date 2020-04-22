@@ -64,9 +64,11 @@ void EntityContainer::loadTextures() {
 	textures->load(Texture::ROCK, "./assets/rock.png");
 	textures->load(Texture::GRASS, "./assets/grass.png");
 	textures->load(Texture::WALL, "./assets/wall.png");
-	textures->load(Texture::DINO_GREEN, "./assets/dino_green.png");
 	textures->load(Texture::VERTICAL_WALL, "./assets/vertical_wall.png");
 	textures->load(Texture::FLOOR, "./assets/floor.png");
+
+	textures->load(Texture::DINO_GREEN, "./assets/dino_green.png");
+	textures->load(Texture::PRINCESS, "./assets/princess.png");
 }
 
 void EntityContainer::createBlock(Entity::Type type, float x, float y) {
@@ -97,12 +99,12 @@ void EntityContainer::removeBlock(float x, float y) {
 	}
 }
 
-Player* EntityContainer::createPlayer(float x, float y) {
+Player* EntityContainer::createPlayer(float x, float y, Texture::ID texID, const std::string& animFile) {
 
 	playerAnimation.setAnimation("STOP_DOWN");
-	playerAnimation.setTexture(Texture::DINO_GREEN);
+	playerAnimation.setTexture(texID);
 	playerAnimation.setTextureHolder(textures);
-	playerAnimation.loadAnimationFromFile("./animations/dino_green.anim");
+	playerAnimation.loadAnimationFromFile(animFile);
 
 	player = new Player(x, y, &playerAnimation);
 	return player;
@@ -110,7 +112,6 @@ Player* EntityContainer::createPlayer(float x, float y) {
 
 void EntityContainer::movePlayer(Player::Move move, float deltaTime) {
 	auto pos = player->getPosition();
-	float quadRadius = BLOCK_WIDTH / 2;
 
 	switch(move) {
 		case Player::LEFT: 
@@ -127,10 +128,10 @@ void EntityContainer::movePlayer(Player::Move move, float deltaTime) {
 			break;
 	}
 
-	sf::Vector2f top_left(pos.x - quadRadius, pos.y);
-	sf::Vector2f down_left(pos.x - quadRadius, pos.y + quadRadius);
-	sf::Vector2f top_right(pos.x + quadRadius, pos.y);
-	sf::Vector2f down_right(pos.x + quadRadius, pos.y + quadRadius);
+	sf::Vector2f top_left(pos.x - PLAYER_WIDTH / 2, pos.y);
+	sf::Vector2f down_left(pos.x - PLAYER_WIDTH / 2, pos.y + PLAYER_HEIGHT / 2);
+	sf::Vector2f top_right(pos.x + PLAYER_WIDTH / 2, pos.y);
+	sf::Vector2f down_right(pos.x + PLAYER_WIDTH / 2, pos.y + PLAYER_HEIGHT / 2);
 
 	if(isMoveEnable(top_left) &&
 	   isMoveEnable(down_left) &&

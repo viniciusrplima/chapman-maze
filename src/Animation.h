@@ -15,6 +15,9 @@
 #ifndef __ANIMATION_H_
 #define __ANIMATION_H_
 
+#define PLAYER_WIDTH 20.0f
+#define PLAYER_HEIGHT 30.0f
+
 class Animation {
 
 public:

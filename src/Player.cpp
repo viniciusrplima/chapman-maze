@@ -63,7 +63,7 @@ Player::Move Player::getMove() {
 }
 
 void Player::draw(sf::RenderTarget& target, sf::RenderStates states) {
-	states.transform.translate(position.x - 6, position.y - 8);
+	states.transform.translate(position.x - PLAYER_WIDTH / 2, position.y - PLAYER_HEIGHT / 2);
 	animation->draw(target, states);
 }
 

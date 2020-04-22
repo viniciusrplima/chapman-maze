@@ -1,7 +1,7 @@
 
 OBJS = objs/main.o objs/Entity.o objs/EntityContainer.o objs/Maze.o objs/TextureHolder.o \
        objs/Camera.o objs/Player.o objs/Animation.o objs/AnimationSet.o objs/Block.o \
-       objs/HUD.o
+       objs/HUD.o objs/Menu.o
 
 LIBS = -lstdc++ -lm -lsfml-graphics -lsfml-window -lsfml-system -lGL
 
@@ -40,6 +40,9 @@ objs/Block.o: src/Block.h src/Block.cpp
 
 objs/HUD.o: src/HUD.h src/HUD.cpp
 	gcc -c src/HUD.cpp -o objs/HUD.o
+
+objs/Menu.o: src/Menu.h src/Menu.cpp
+	gcc -c src/Menu.cpp -o objs/Menu.o
 
 clean:
 	rm maze $(OBJS)

@@ -14,12 +14,12 @@
 
 #include "Maze.h"
 
-Maze::Maze() : window(sf::VideoMode(600.0f, 480.0f), "Chapman Maze") {
+Maze::Maze() {
 	handState.blockType = Entity::ROCK;
 	handState.removeForward = false;
 }
 
-void Maze::run() {
+void Maze::run(sf::RenderWindow& window, Texture::ID playerTex, const std::string& animFile) {
 
 	TextureHolder textures;
 
@@ -27,7 +27,7 @@ void Maze::run() {
 	world.loadTextures();
 	world.loadWorldMap("./maps/default.map");
 
-	player = world.createPlayer(-20.0f, -20.0f);
+	player = world.createPlayer(-20.0f, -20.0f, playerTex, animFile);
 	player->setPosition(10.0f, 0.0f);
 
 	gameHUD.setHandState(&handState);
@@ -40,11 +40,11 @@ void Maze::run() {
 		
 		sf::Event event;
 		while(window.pollEvent(event)) {
-			eventHandle(event);
+			eventHandle(window, event);
 		}
 
 		update();
-		render();
+		render(window);
 	}
 }
 
@@ -55,7 +55,7 @@ void Maze::update() {
 	world.update();
 }
 
-void Maze::render() {
+void Maze::render(sf::RenderWindow& window) {
 
 	sf::RenderStates state = camera.getRenderState();
 
@@ -70,7 +70,7 @@ void Maze::render() {
 	window.display();
 }
 
-void Maze::eventHandle(sf::Event event) {
+void Maze::eventHandle(sf::RenderWindow& window, sf::Event event) {
 	if(event.type == sf::Event::Closed) {
 		window.close();
 	}

@@ -14,6 +14,9 @@
 
 #define PLAYER_SPEED 40.0f
 
+#ifndef __PLAYER_H_
+#define __PLAYER_H_
+
 class Player : public Entity {
 
 public:
@@ -43,3 +46,5 @@ private:
 	Move move;
 	AnimationSet* animation;
 };
+
+#endif
