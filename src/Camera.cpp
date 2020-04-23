@@ -14,7 +14,7 @@
 #include "Camera.h"
 
 Camera::Camera() {
-	zoom = 1.0f;
+	zoom = 3.0f;
 	position.x = 0.0f;
 	position.y = 0.0f;
 	windowSize.x = 100.0f;

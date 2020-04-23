@@ -53,5 +53,7 @@ private:
 	TextureHolder textures;
 	sf::Sprite sprite;
 	AnimationSet *animation;
+	sf::Font font;
+	sf::Sprite title;
 };
 

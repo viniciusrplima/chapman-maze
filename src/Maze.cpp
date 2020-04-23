@@ -30,10 +30,14 @@ void Maze::run(sf::RenderWindow& window, Texture::ID playerTex, const std::strin
 	player = world.createPlayer(-20.0f, -20.0f, playerTex, animFile);
 	player->setPosition(10.0f, 0.0f);
 
+	auto windowSize = window.getSize();
+
 	gameHUD.setHandState(&handState);
 	gameHUD.setTextureHolder(&textures);
+	gameHUD.setAspect(sf::Vector2f(600.0f / windowSize.x, 480.0f / windowSize.y));
 
 	window.setFramerateLimit(60);
+	camera.setWindowSize(windowSize.x, windowSize.y);
 
 	while( window.isOpen() ) {
 	

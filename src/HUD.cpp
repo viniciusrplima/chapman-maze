@@ -71,7 +71,7 @@ void HUD::draw(sf::RenderTarget& target) {
 	mdState.transform.translate(0.0f, 20.0f);
 	target.draw(mdText, mdState);
 
-	std::string mode = hand->removeForward ? "remocao" : "adicao";
+	std::string mode = hand->removeForward ? "remove" : "add";
 	sf::Text mdModeText(mode, font);
 	mdModeText.setScale(fs * aspect.x, fs * aspect.y);
 	mdState.transform.translate(0.0f, 50.0f);
@@ -101,7 +101,7 @@ void HUD::draw(sf::RenderTarget& target) {
 	cmdState.transform.translate(0.0f, 20.0f);
 	target.draw(cmdText, cmdState);
 
-	sf::Text cmdListText("+/- - zoom \nA - modo adicao \nZ - modo remocao", font);
+	sf::Text cmdListText("+/- - zoom \nA - add mode \nZ - remove mode\nS - save map", font);
 	cmdListText.setScale(fs * aspect.x, fs * aspect.y);
 	cmdState.transform.translate(0.0f, 20.0f);
 	target.draw(cmdListText, cmdState);
