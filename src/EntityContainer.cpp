@@ -59,7 +59,6 @@ void EntityContainer::setTextureHolder(TextureHolder* textures) {
 }
 
 void EntityContainer::loadTextures() {
-	textures->load(Texture::SOLDIER, "./assets/soldier.png");
 	textures->load(Texture::WATER, "./assets/water.png");
 	textures->load(Texture::ROCK, "./assets/rock.png");
 	textures->load(Texture::GRASS, "./assets/grass.png");
@@ -69,6 +68,7 @@ void EntityContainer::loadTextures() {
 
 	textures->load(Texture::DINO_GREEN, "./assets/dino_green.png");
 	textures->load(Texture::PRINCESS, "./assets/princess.png");
+	textures->load(Texture::CHICKEN, "./assets/chicken_walk.png");
 }
 
 void EntityContainer::createBlock(Entity::Type type, float x, float y) {

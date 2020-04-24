@@ -45,6 +45,7 @@ private:
 		// List of characters
 		std::make_tuple( Texture::DINO_GREEN, "./animations/dino_green.anim" ), 
 		std::make_tuple( Texture::PRINCESS, "./animations/princess.anim" ), 
+		std::make_tuple( Texture::CHICKEN, "./animations/chicken.anim" ), 
 
 	};
 

@@ -12,7 +12,7 @@
 #include "Menu.h"
 
 Menu::Menu() {
-	currentCharacter = 1;
+	currentCharacter = playerCharacters.size() - 1;
 }
 
 void Menu::run(sf::RenderWindow& window) {

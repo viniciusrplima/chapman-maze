@@ -20,7 +20,6 @@
 
 namespace Texture {
 	enum ID {
-		SOLDIER, 
 		WATER, 
 		ROCK, 
 		GRASS, 
@@ -29,7 +28,8 @@ namespace Texture {
 		FLOOR, 
 
 		DINO_GREEN,
-		PRINCESS
+		PRINCESS, 
+		CHICKEN
 	};
 }
 
