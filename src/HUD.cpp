@@ -101,7 +101,7 @@ void HUD::draw(sf::RenderTarget& target) {
 	cmdState.transform.translate(0.0f, 20.0f);
 	target.draw(cmdText, cmdState);
 
-	sf::Text cmdListText("+/- - zoom \nA - add mode \nZ - remove mode\nS - save map", font);
+	sf::Text cmdListText("+/- - zoom \nA - add mode \nZ - remove mode\nS - save map\nspace - add block", font);
 	cmdListText.setScale(fs * aspect.x, fs * aspect.y);
 	cmdState.transform.translate(0.0f, 20.0f);
 	target.draw(cmdListText, cmdState);

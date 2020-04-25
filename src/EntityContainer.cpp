@@ -69,6 +69,7 @@ void EntityContainer::loadTextures() {
 	textures->load(Texture::DINO_GREEN, "./assets/dino_green.png");
 	textures->load(Texture::PRINCESS, "./assets/princess.png");
 	textures->load(Texture::CHICKEN, "./assets/chicken_walk.png");
+	textures->load(Texture::MAGE, "./assets/mage.png");
 }
 
 void EntityContainer::createBlock(Entity::Type type, float x, float y) {

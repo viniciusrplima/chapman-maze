@@ -29,7 +29,8 @@ namespace Texture {
 
 		DINO_GREEN,
 		PRINCESS, 
-		CHICKEN
+		CHICKEN, 
+		MAGE
 	};
 }
 
