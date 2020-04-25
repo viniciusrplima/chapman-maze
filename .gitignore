@@ -2,9 +2,5 @@
 objs/
 *.o
 
-assets/
-
-maps/
-
 maze
 
