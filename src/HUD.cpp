@@ -21,10 +21,6 @@ void HUD::setHandState(HandState* hand) {
 	this->hand = hand;	
 }
 
-void HUD::setTextureHolder(TextureHolder* textureHolder) {
-	this->textureHolder = textureHolder;
-}
-
 void HUD::setAspect(sf::Vector2f aspect) {
 	this->aspect = aspect;
 }
@@ -54,7 +50,7 @@ void HUD::draw(sf::RenderTarget& target) {
 	bhState.transform.translate(0.0f, 20.0f);
 	target.draw(bhText, bhState);
 
-	sf::Sprite block(textureHolder->get(hand->blockType));
+	sf::Sprite block(g_pTextureHolder->get(hand->blockTex));
 	block.setScale(2.0f * aspect.x, 2.0f * aspect.y);
 	
 	bhState.transform.translate(0.0f, 20.0f);

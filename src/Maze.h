@@ -28,7 +28,7 @@ public:
 	
 	Maze();
 
-	void run(sf::RenderWindow&, Texture::ID playerTex, const std::string& animFile);
+	void run(sf::RenderWindow&, const std::string& spriteFile, const std::string& animFile);
 	void update();
 	void render(sf::RenderWindow&);
 	void eventHandle(sf::RenderWindow&, sf::Event);

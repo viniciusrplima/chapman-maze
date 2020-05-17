@@ -30,14 +30,11 @@ void AnimationSet::draw(sf::RenderTarget& target, sf::RenderStates states) {
 	found->second->draw(target, states);
 }
 
-void AnimationSet::setTexture(Texture::ID id){
-	textureID = id;
+void AnimationSet::setTextureID(Texture::ID texId) {
+	textureID = texId;
 }
 
-void AnimationSet::setTextureHolder(TextureHolder* texHolder) {
-	textureHolder = texHolder;
-}
-
+// Parse whole file of animation
 void AnimationSet::loadAnimationFromFile(const std::string& filename) {
 	std::ifstream file(filename);
 	std::string line = "";
@@ -51,6 +48,7 @@ void AnimationSet::loadAnimationFromFile(const std::string& filename) {
 	}
 }
 
+// Parse one move of animation
 void AnimationSet::parseAnimation(const std::string& id, std::ifstream& file) {
 	std::string line = "";
 
@@ -58,7 +56,7 @@ void AnimationSet::parseAnimation(const std::string& id, std::ifstream& file) {
 	float duration = std::stof(line);
 
 	Animation* anim = new Animation();
-	anim->setTexture(textureHolder->get(textureID));
+	anim->setTexture(g_pTextureHolder->get(textureID));
 	anim->setDuration(duration);
 
 	std::getline(file, line);
@@ -73,6 +71,7 @@ void AnimationSet::parseAnimation(const std::string& id, std::ifstream& file) {
 	addAnimation(id, anim);
 }
 
+// Parse one frame of move
 sf::IntRect AnimationSet::parseFrame(const std::string& line) {
 	std::stringstream tokens(line);
 	std::string token = "";

@@ -17,15 +17,22 @@ Menu::Menu() {
 
 void Menu::run(sf::RenderWindow& window) {
 
-	EntityContainer container;
-	container.setTextureHolder(&textures);
-	container.loadTextures();
+
+	for(auto character = playerCharacters.begin(); 
+	    character != playerCharacters.end(); character++) {
+		
+		Texture::ID id = std::get<0>(*character);
+		std::string filename = std::get<2>(*character);
+
+		g_pTextureHolder->load(id, filename);
+	}
 
 	setupCharacter();
 
 	sf::Texture titleTex;
 	titleTex.loadFromFile("./assets/title.png");
 	title.setTexture(titleTex);
+
 
 	if(!font.loadFromFile("./fonts/PressStart2P-Regular.ttf")) {
 		std::cout << "Error loading font" << std::endl;
@@ -122,11 +129,11 @@ void Menu::render(sf::RenderWindow& window) {
 SETUP Menu::getSetup() {
 	SETUP setup;
 
-	Texture::ID texID = std::get<0>(playerCharacters[currentCharacter]);
 	std::string animFile = std::get<1>(playerCharacters[currentCharacter]);
+	std::string spriteFile = std::get<2>(playerCharacters[currentCharacter]);
 
-	setup.tex = texID;
-	setup.animFile = animFile;
+	setup.anim_file = animFile;
+	setup.sprite_file = spriteFile;
 
 	return setup;
 }
@@ -137,8 +144,7 @@ void Menu::setupCharacter() {
 
 	animation = new AnimationSet();
 	animation -> setAnimation("DOWN");
-	animation -> setTexture(texID);
-	animation -> setTextureHolder(&textures);
+	animation -> setTextureID(texID);
 	animation -> loadAnimationFromFile(animFile);
 }
 

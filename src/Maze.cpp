@@ -19,21 +19,17 @@ Maze::Maze() {
 	handState.removeForward = false;
 }
 
-void Maze::run(sf::RenderWindow& window, Texture::ID playerTex, const std::string& animFile) {
+void Maze::run(sf::RenderWindow& window, const std::string& spriteFile, const std::string& animFile) {
 
-	TextureHolder textures;
-
-	world.setTextureHolder(&textures);
 	world.loadTextures();
 	world.loadWorldMap("./maps/default.map");
 
-	player = world.createPlayer(-20.0f, -20.0f, playerTex, animFile);
+	player = world.createPlayer(-20.0f, -20.0f, spriteFile, animFile);
 	player->setPosition(10.0f, 0.0f);
 
 	auto windowSize = window.getSize();
 
 	gameHUD.setHandState(&handState);
-	gameHUD.setTextureHolder(&textures);
 	gameHUD.setAspect(sf::Vector2f(600.0f / windowSize.x, 480.0f / windowSize.y));
 
 	window.setFramerateLimit(60);
@@ -118,6 +114,7 @@ void Maze::updateInput() {
 	if(keyboardState[ sf::Keyboard::R ]) handState.blockType = Entity::WALL;
 	if(keyboardState[ sf::Keyboard::T ]) handState.blockType = Entity::VERTICAL_WALL;
 	if(keyboardState[ sf::Keyboard::Y ]) handState.blockType = Entity::FLOOR;
+	handState.blockTex = world.getTextureFromEntity(handState.blockType);
 
 
 	if(keyboardState[ sf::Keyboard::A ]) handState.removeForward = false;

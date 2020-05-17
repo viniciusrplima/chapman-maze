@@ -22,11 +22,13 @@ EntityContainer::EntityContainer() : playerAnimation() {
 }
 
 void EntityContainer::draw(sf::RenderTarget& target, sf::RenderStates states) {
+	// Draw all blocks
 	for(auto iter = ground.begin(); iter != ground.end(); iter++) {
 		iter->second->draw(target, states);
 	}
 }
 
+// Draw green mark for block addition
 void EntityContainer::drawAddMark(sf::Vector2f pos, sf::RenderTarget& target, sf::RenderStates states) {
 	auto quadPos = calculateBlockQuad(pos.x, pos.y);
 
@@ -38,6 +40,7 @@ void EntityContainer::drawAddMark(sf::Vector2f pos, sf::RenderTarget& target, sf
 	target.draw(rect, states);
 }
 
+// Draw red mark for block deletion
 void EntityContainer::drawDelMark(sf::Vector2f pos, sf::RenderTarget& target, sf::RenderStates states) {
 	auto quadPos = calculateBlockQuad(pos.x, pos.y);
 
@@ -54,22 +57,14 @@ void EntityContainer::drawDelMark(sf::Vector2f pos, sf::RenderTarget& target, sf
 void EntityContainer::update() {
 }
 
-void EntityContainer::setTextureHolder(TextureHolder* textures) {
-	this->textures = textures;
-}
-
+// Load sprites for blocks
 void EntityContainer::loadTextures() {
-	textures->load(Texture::WATER, "./assets/water.png");
-	textures->load(Texture::ROCK, "./assets/rock.png");
-	textures->load(Texture::GRASS, "./assets/grass.png");
-	textures->load(Texture::WALL, "./assets/wall.png");
-	textures->load(Texture::VERTICAL_WALL, "./assets/vertical_wall.png");
-	textures->load(Texture::FLOOR, "./assets/floor.png");
-
-	textures->load(Texture::DINO_GREEN, "./assets/dino_green.png");
-	textures->load(Texture::PRINCESS, "./assets/princess.png");
-	textures->load(Texture::CHICKEN, "./assets/chicken_walk.png");
-	textures->load(Texture::MAGE, "./assets/mage.png");
+	WATER = g_pTextureHolder->load("./assets/water.png");
+	ROCK = g_pTextureHolder->load("./assets/rock.png");
+	GRASS = g_pTextureHolder->load("./assets/grass.png");
+	WALL = g_pTextureHolder->load("./assets/wall.png");
+	VERTICAL_WALL = g_pTextureHolder->load("./assets/vertical_wall.png");
+	FLOOR = g_pTextureHolder->load("./assets/floor.png");
 }
 
 void EntityContainer::createBlock(Entity::Type type, float x, float y) {
@@ -80,7 +75,9 @@ void EntityContainer::createBlock(Entity::Type type, float x, float y) {
 
 	if(found != ground.end()) return;
 
-	Entity* entity = new Block(type, blockQuad.x, blockQuad.y, textures->get(type));
+	Texture::ID tex = getTextureFromEntity(type);
+
+	Entity* entity = new Block(type, blockQuad.x, blockQuad.y, g_pTextureHolder->get(tex));
 
 	if(type == Entity::WALL || 
 	   type == Entity::VERTICAL_WALL || 
@@ -100,11 +97,44 @@ void EntityContainer::removeBlock(float x, float y) {
 	}
 }
 
-Player* EntityContainer::createPlayer(float x, float y, Texture::ID texID, const std::string& animFile) {
+Texture::ID EntityContainer::getTextureFromEntity(Entity::Type type) {
+	Texture::ID tex;
 
+	// Choose texture for Entity type
+	switch(type) {
+		case Entity::WATER: 
+			tex = WATER;
+			break;
+		case Entity::ROCK:
+			tex = ROCK;
+			break;
+		case Entity::GRASS:
+			tex = GRASS;
+			break;
+		case Entity::WALL:
+			tex = WALL;
+			break;
+		case Entity::VERTICAL_WALL:
+			tex = VERTICAL_WALL;
+			break;
+		case Entity::FLOOR:
+			tex = FLOOR;
+			break;
+	}
+
+	return tex;
+}
+
+Player* EntityContainer::createPlayer(
+		float x, 
+		float y, 
+		const std::string& spriteFile, 
+		const std::string& animFile) {
+
+
+	Texture::ID id = g_pTextureHolder->load(spriteFile);
 	playerAnimation.setAnimation("STOP_DOWN");
-	playerAnimation.setTexture(texID);
-	playerAnimation.setTextureHolder(textures);
+	playerAnimation.setTextureID(id);
 	playerAnimation.loadAnimationFromFile(animFile);
 
 	player = new Player(x, y, &playerAnimation);

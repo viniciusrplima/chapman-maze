@@ -27,8 +27,7 @@ public:
 	void setAnimation(std::string id);
 	std::string getAnimation();
 	void draw(sf::RenderTarget& target, sf::RenderStates states);
-	void setTexture(Texture::ID id);
-	void setTextureHolder(TextureHolder* texHolder);
+	void setTextureID(Texture::ID texId);
 	void loadAnimationFromFile(const std::string& filename);
 
 	~AnimationSet();
@@ -42,7 +41,6 @@ private:
 	void cleanAnimations();
 
 	Texture::ID textureID;
-	TextureHolder* textureHolder;
 	std::string currentAnimation;
 	std::map<std::string, Animation*> animations;
 };

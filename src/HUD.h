@@ -24,7 +24,6 @@ public:
 	HUD();
 
 	void setHandState(HandState* hand);
-	void setTextureHolder(TextureHolder* textureHolder);
 	void setAspect(sf::Vector2f);
 	void draw(sf::RenderTarget& target);
 
@@ -33,7 +32,6 @@ public:
 
 private:
 	HandState* hand;
-	TextureHolder* textureHolder;
 	sf::Vector2f aspect;
 	sf::Font font;
 };
